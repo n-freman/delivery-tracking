@@ -1,0 +1,440 @@
+# Turkmen translations for DMCargo
+# Copyright (C) 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DMCargo\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-07 15:56+0500\n"
+"PO-Revision-Date: 2026-03-07 15:56+0500\n"
+"Last-Translator: DMCargo\n"
+"Language-Team: Turkmen\n"
+"Language: tk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/authentication/templates/auth/login.html:4
+#: apps/authentication/templates/auth/login.html:9
+#: apps/authentication/templates/auth/login.html:38
+#: templates/partials/header.html:10
+msgid "Login"
+msgstr "Giriş"
+
+#: apps/authentication/templates/auth/login.html:13
+msgid "Invalid username or password."
+msgstr "Ulanyjy ady ýa-da açar sözi nädogry."
+
+#: apps/authentication/templates/auth/login.html:20
+msgid "Username"
+msgstr "Ulanyjy ady"
+
+#: apps/authentication/templates/auth/login.html:30
+msgid "Password"
+msgstr "Açar sözi"
+
+#: apps/general/templates/general/index.html:4
+msgid "Home"
+msgstr "Baş sahypa"
+
+#: apps/general/templates/general/index.html:11
+msgid "Welcome"
+msgstr "Hoş geldiňiz"
+
+#: apps/general/templates/general/index.html:12
+msgid "Here are your recent orders."
+msgstr "Siziň soňky sargytlaryňyz."
+
+#: apps/general/templates/general/index.html:15
+#: apps/general/templates/general/index.html:64
+#: apps/orders/templates/orders/list.html:13
+#: apps/orders/templates/orders/list.html:74 apps/orders/views.py:46
+msgid "New Order"
+msgstr "Täze sargyt"
+
+#: apps/general/templates/general/index.html:24
+#: apps/orders/templates/orders/list.html:27
+msgid "Order ID"
+msgstr "Sargyt ID"
+
+#: apps/general/templates/general/index.html:25
+#: apps/orders/templates/orders/list.html:28
+msgid "Delivery"
+msgstr "Eltip beriş"
+
+#: apps/general/templates/general/index.html:26
+#: apps/orders/templates/orders/list.html:29
+msgid "Payment"
+msgstr "Töleg"
+
+#: apps/general/templates/general/index.html:27
+#: apps/orders/templates/orders/detail.html:31
+#: apps/orders/templates/orders/list.html:30
+msgid "Status"
+msgstr "Ýagdaý"
+
+#: apps/general/templates/general/index.html:28
+#: apps/orders/templates/orders/detail.html:37
+#: apps/orders/templates/orders/form.html:35
+#: apps/orders/templates/orders/list.html:31
+msgid "Products"
+msgstr "Harytlar"
+
+#: apps/general/templates/general/index.html:46
+#: apps/orders/templates/orders/list.html:48
+msgid "View"
+msgstr "Görmek"
+
+#: apps/general/templates/general/index.html:56
+msgid "View all orders"
+msgstr "Ähli sargytlary görmek"
+
+#: apps/general/templates/general/index.html:61
+#: apps/orders/templates/orders/list.html:72
+msgid "No orders yet."
+msgstr "Heniz sargyt ýok."
+
+#: apps/general/templates/general/index.html:62
+#: apps/orders/templates/orders/list.html:73
+msgid "Create your first order to get started."
+msgstr "Başlamak üçin ilkinji sargytyňyzy dörediň."
+
+#: apps/orders/admin.py:11 apps/products/models.py:56
+msgid "product"
+msgstr "haryt"
+
+#: apps/orders/admin.py:12 apps/products/models.py:57
+msgid "products"
+msgstr "harytlar"
+
+#: apps/orders/admin.py:23 apps/products/admin.py:13
+msgid "General"
+msgstr "Umumy"
+
+#: apps/orders/admin.py:26 apps/orders/templates/orders/form.html:22
+msgid "Order Details"
+msgstr "Sargyt maglumatlary"
+
+#: apps/orders/forms.py:23
+msgid "Product title"
+msgstr "Harydyň ady"
+
+#: apps/orders/forms.py:26
+msgid "Optional notes"
+msgstr "Goşmaça bellikler (hökmany däl)"
+
+#: apps/orders/models.py:9
+msgid "Avia"
+msgstr "Awia"
+
+#: apps/orders/models.py:10
+msgid "Express"
+msgstr "Ekspress"
+
+#: apps/orders/models.py:11
+msgid "Auto"
+msgstr "Awto"
+
+#: apps/orders/models.py:15
+msgid "Half"
+msgstr "Ýarym"
+
+#: apps/orders/models.py:16
+msgid "Full"
+msgstr "Doly"
+
+#: apps/orders/models.py:20
+msgid "Saved"
+msgstr "Saklandy"
+
+#: apps/orders/models.py:21
+msgid "Reviewed"
+msgstr "Seredildi"
+
+#: apps/orders/models.py:22
+msgid "Ordered"
+msgstr "Sargyldy"
+
+#: apps/orders/models.py:32
+msgid "ordered by"
+msgstr "sargyt eden"
+
+#: apps/orders/models.py:33
+msgid "The user who placed this order."
+msgstr "Bu sargydy eden ulanyjy."
+
+#: apps/orders/models.py:37
+msgid "public ID"
+msgstr "açyk ID"
+
+#: apps/orders/models.py:38
+msgid "A unique public-facing identifier for this order (max 16 characters)."
+msgstr "Sargyt üçin ýeke-täk açyk identifikator (iň köp 16 simwol)."
+
+#: apps/orders/models.py:44
+msgid "delivery type"
+msgstr "eltip beriş görnüşi"
+
+#: apps/orders/models.py:45
+msgid "The method used to deliver this order (Avia, Express, or Auto)."
+msgstr "Sargydy eltip bermek usuly (Awia, Ekspress ýa-da Awto)."
+
+#: apps/orders/models.py:51
+msgid "payment type"
+msgstr "töleg görnüşi"
+
+#: apps/orders/models.py:52
+msgid "Whether the order is paid in full or in two installments (Half)."
+msgstr "Sargyt doly ýa-da iki bölekde (ýarym) tölenýär."
+
+#: apps/orders/models.py:58
+msgid "status"
+msgstr "ýagdaý"
+
+#: apps/orders/models.py:59
+msgid "Current processing status of the order."
+msgstr "Sargytyň häzirki işlenýän ýagdaýy."
+
+#: apps/orders/models.py:63 apps/products/models.py:46
+msgid "order"
+msgstr "sargyt"
+
+#: apps/orders/models.py:64
+msgid "orders"
+msgstr "sargytlar"
+
+#: apps/orders/models.py:72
+#, python-format
+msgid "Order %(public_id)s by %(user)s"
+msgstr "%(user)s tarapyndan %(public_id)s sargydy"
+
+#: apps/orders/templates/orders/confirm_delete.html:4
+#: apps/orders/templates/orders/confirm_delete.html:10
+msgid "Delete Order"
+msgstr "Sargydy pozmak"
+
+#: apps/orders/templates/orders/confirm_delete.html:12
+#, python-format
+msgid ""
+"\n"
+"                    Are you sure you want to delete order <strong>%(id)s</"
+"strong>? This cannot be undone.\n"
+"                "
+msgstr ""
+"\n"
+"                    <strong>%(id)s</strong> sargydyny pozmak isleýärsiňizmi?"
+" Bu ädimi yzyna gaýtaryp bolmaz.\n"
+"                "
+
+#: apps/orders/templates/orders/confirm_delete.html:19
+#: apps/orders/templates/orders/form.html:73
+msgid "Cancel"
+msgstr "Ýatyrmak"
+
+#: apps/orders/templates/orders/confirm_delete.html:20
+#: apps/orders/templates/orders/detail.html:15
+#: apps/orders/templates/orders/list.html:50
+msgid "Delete"
+msgstr "Pozmak"
+
+#: apps/orders/templates/orders/detail.html:4
+#: apps/orders/templates/orders/detail.html:10
+msgid "Order"
+msgstr "Sargyt"
+
+#: apps/orders/templates/orders/detail.html:14
+#: apps/orders/templates/orders/list.html:49
+msgid "Edit"
+msgstr "Redaktirlemek"
+
+#: apps/orders/templates/orders/detail.html:21
+msgid "Order Info"
+msgstr "Sargyt barada maglumat"
+
+#: apps/orders/templates/orders/detail.html:23
+msgid "Delivery Type"
+msgstr "Eltip beriş görnüşi"
+
+#: apps/orders/templates/orders/detail.html:27
+msgid "Payment Type"
+msgstr "Töleg görnüşi"
+
+#: apps/orders/templates/orders/detail.html:42
+msgid "Title"
+msgstr "Ady"
+
+#: apps/orders/templates/orders/detail.html:43
+msgid "Amount"
+msgstr "Mukdary"
+
+#: apps/orders/templates/orders/detail.html:44
+msgid "Expected Price"
+msgstr "Garaşylýan bahasy"
+
+#: apps/orders/templates/orders/detail.html:45
+msgid "Actual Price"
+msgstr "Hakyky bahasy"
+
+#: apps/orders/templates/orders/detail.html:60
+msgid "No products in this order."
+msgstr "Bu sargytda haryt ýok."
+
+#: apps/orders/templates/orders/detail.html:66
+msgid "Back to orders"
+msgstr "Sargytlara gaýdyp gitmek"
+
+#: apps/orders/templates/orders/form.html:42
+#: apps/orders/templates/orders/form.html:98
+msgid "Product"
+msgstr "Haryt"
+
+#: apps/orders/templates/orders/form.html:45
+msgid "Remove"
+msgstr "Aýyrmak"
+
+#: apps/orders/templates/orders/form.html:68
+msgid "Add Product"
+msgstr "Haryt goşmak"
+
+#: apps/orders/templates/orders/form.html:74
+msgid "Save Order"
+msgstr "Sargydy saklamak"
+
+#: apps/orders/templates/orders/list.html:4
+#: apps/orders/templates/orders/list.html:10
+msgid "My Orders"
+msgstr "Meniň sargytlarym"
+
+#: apps/orders/templates/orders/list.html:11
+msgid "Manage all your orders."
+msgstr "Ähli sargytlaryňyzy dolandyryň."
+
+#: apps/orders/templates/orders/list.html:61
+msgid "Previous"
+msgstr "Öňki"
+
+#: apps/orders/templates/orders/list.html:63
+msgid "Page"
+msgstr "Sahypa"
+
+#: apps/orders/templates/orders/list.html:63
+msgid "of"
+msgstr "/"
+
+#: apps/orders/templates/orders/list.html:65
+msgid "Next"
+msgstr "Indiki"
+
+#: apps/orders/views.py:64
+msgid "Order created successfully."
+msgstr "Sargyt üstünlikli döredildi."
+
+#: apps/orders/views.py:81
+msgid "Edit Order"
+msgstr "Sargydy redaktirlemek"
+
+#: apps/orders/views.py:96
+msgid "Order updated successfully."
+msgstr "Sargyt üstünlikli täzelendi."
+
+#: apps/orders/views.py:112
+msgid "Order deleted successfully."
+msgstr "Sargyt üstünlikli pozuldy."
+
+#: apps/products/admin.py:16
+msgid "Pricing"
+msgstr "Bahalar"
+
+#: apps/products/admin.py:19
+msgid "Additional"
+msgstr "Goşmaça"
+
+#: apps/products/models.py:9
+msgid "title"
+msgstr "ady"
+
+#: apps/products/models.py:10
+msgid "The name or title of the product (max 120 characters)."
+msgstr "Harydyň ady (iň köp 120 simwol)."
+
+#: apps/products/models.py:14
+msgid "image"
+msgstr "surat"
+
+#: apps/products/models.py:15
+msgid "Product image file."
+msgstr "Harydyň surat faýly."
+
+#: apps/products/models.py:19
+msgid "amount"
+msgstr "mukdary"
+
+#: apps/products/models.py:20
+msgid "Quantity of this product in the order."
+msgstr "Sargytdaky bu harydyň mukdary."
+
+#: apps/products/models.py:25
+msgid "expected price"
+msgstr "garaşylýan bahasy"
+
+#: apps/products/models.py:26
+msgid "The anticipated price of the product before confirmation."
+msgstr "Tassyklanmazdan öň harydyň garaşylýan bahasy."
+
+#: apps/products/models.py:33
+msgid "actual price"
+msgstr "hakyky bahasy"
+
+#: apps/products/models.py:34
+msgid "The final confirmed price of the product. Leave blank if not yet known."
+msgstr "Harydyň tassyklanan ahyrky bahasy. Belli bolmasa boş goýuň."
+
+#: apps/products/models.py:39
+msgid "notes"
+msgstr "bellikler"
+
+#: apps/products/models.py:40
+msgid "Any additional notes or remarks about this product."
+msgstr "Bu haryt barada islendik goşmaça bellikler ýa-da düşündirişler."
+
+#: apps/products/models.py:47
+msgid "The order this product belongs to."
+msgstr "Bu harydyň degişli sargydy."
+
+#: apps/products/models.py:51
+msgid "include in order"
+msgstr "sargyda goşmak"
+
+#: apps/products/models.py:52
+msgid "Whether this product should be included when processing the order."
+msgstr "Sargydy işlenende bu harydyň goşulmalydygyny görkezýär."
+
+#: apps/products/models.py:64
+#, python-format
+msgid "%(title)s (x%(amount)s)"
+msgstr "%(title)s (x%(amount)s)"
+
+#: core/settings.py:125
+msgid "English"
+msgstr "Iňlis dili"
+
+#: core/settings.py:126
+msgid "Russian"
+msgstr "Rus dili"
+
+#: core/settings.py:127
+msgid "Turkmen"
+msgstr "Türkmen dili"
+
+#: templates/base.html:7
+msgid "Delivery Tracking"
+msgstr "Eltip beriş yzarlamasy"
+
+#: templates/partials/footer.html:4
+msgid "All rights reserved."
+msgstr "Ähli hukuklar goragly."
+
+#: templates/partials/header.html:8
+msgid "Logout"
+msgstr "Çykmak"

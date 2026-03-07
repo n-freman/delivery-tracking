@@ -1,0 +1,30 @@
+{% load i18n %}
+<header class="header">
+    <div class="container">
+        <a href="/" class="logo">DMCargo</a>
+        <nav class="nav">
+            <div class="lang-switcher">
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    <select name="language" onchange="this.form.submit()">
+                        {% for code, name in LANGUAGES %}
+                            <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>
+                                {{ name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+
+            {% if user.is_authenticated %}
+                <span class="nav-user">{{ user.username }}</span>
+                <a href="{% url 'auth:logout' %}" class="nav-link">{% trans "Logout" %}</a>
+            {% else %}
+                <a href="{% url 'auth:login' %}" class="nav-link">{% trans "Login" %}</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>

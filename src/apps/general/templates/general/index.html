@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">{% trans "Welcome" %}, {{ user.username }}</h1>
+            <p class="page-subtitle">{% trans "Here are your recent orders." %}</p>
+        </div>
+        <a href="{% url 'orders:create' %}" class="btn btn-primary">
+            + {% trans "New Order" %}
+        </a>
+    </div>
+
+    {% if recent_orders %}
+        <div class="orders-table-wrapper">
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>{% trans "Order ID" %}</th>
+                        <th>{% trans "Delivery" %}</th>
+                        <th>{% trans "Payment" %}</th>
+                        <th>{% trans "Status" %}</th>
+                        <th>{% trans "Products" %}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in recent_orders %}
+                    <tr>
+                        <td class="order-id">{{ order.public_id }}</td>
+                        <td>{{ order.get_delivery_type_display }}</td>
+                        <td>{{ order.get_payment_type_display }}</td>
+                        <td>
+                            <span class="badge badge-{{ order.status|lower }}">
+                                {{ order.get_status_display }}
+                            </span>
+                        </td>
+                        <td>{{ order.products.count }}</td>
+                        <td>
+                            <a href="{% url 'orders:detail' order.pk %}" class="table-link">
+                                {% trans "View" %} →
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="orders-footer">
+            <a href="{% url 'orders:list' %}" class="btn btn-outline">
+                {% trans "View all orders" %}
+            </a>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p class="empty-title">{% trans "No orders yet." %}</p>
+            <p class="empty-sub">{% trans "Create your first order to get started." %}</p>
+            <a href="{% url 'orders:create' %}" class="btn btn-primary">
+                + {% trans "New Order" %}
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

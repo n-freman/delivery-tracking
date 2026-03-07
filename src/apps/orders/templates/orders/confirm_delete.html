@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete Order" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <h1 class="auth-title">{% trans "Delete Order" %}</h1>
+            <p style="margin-bottom: 1.5rem; color: var(--gray-500);">
+                {% blocktrans with id=order.public_id %}
+                    Are you sure you want to delete order <strong>{{ id }}</strong>? This cannot be undone.
+                {% endblocktrans %}
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-actions">
+                    <a href="{% url 'orders:list' %}" class="btn btn-outline">{% trans "Cancel" %}</a>
+                    <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

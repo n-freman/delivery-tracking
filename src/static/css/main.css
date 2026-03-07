@@ -1,0 +1,487 @@
+/* ── Reset ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Variables ────────────────────────────────────────────────────────────── */
+:root {
+    --yellow-50:  #fefce8;
+    --yellow-100: #fef9c3;
+    --yellow-400: #facc15;
+    --yellow-500: #eab308;
+    --yellow-600: #ca8a04;
+    --yellow-700: #a16207;
+    --gray-100:   #f3f4f6;
+    --gray-200:   #e5e7eb;
+    --gray-500:   #6b7280;
+    --gray-800:   #1f2937;
+    --white:      #ffffff;
+
+	--font: "Inter", system-ui, -apple-system, sans-serif;
+    --radius:     6px;
+    --shadow:     0 1px 3px rgba(0,0,0,.1);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+body {
+    font-family: var(--font);
+    background: var(--gray-100);
+    color: var(--gray-800);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a { color: var(--yellow-700); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.header {
+    background: var(--yellow-600);
+    color: var(--white);
+    padding: .875rem 0;
+    box-shadow: var(--shadow);
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: .02em;
+}
+
+.nav { display: flex; align-items: center; gap: 1.25rem; }
+
+.nav-link { color: var(--white); font-size: .9rem; }
+.nav-link:hover { text-decoration: underline; }
+.nav-user { color: var(--yellow-100); font-size: .9rem; }
+
+/* ── Main ─────────────────────────────────────────────────────────────────── */
+.main-content {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+.footer {
+    background: var(--gray-800);
+    color: var(--gray-500);
+    text-align: center;
+    padding: 1.25rem 0;
+    font-size: .85rem;
+}
+
+/* ── Auth ─────────────────────────────────────────────────────────────────── */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+}
+
+.auth-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--gray-800);
+}
+
+/* ── Forms ────────────────────────────────────────────────────────────────── */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: .875rem;
+    font-weight: 500;
+    margin-bottom: .375rem;
+    color: var(--gray-800);
+}
+
+.form-group input {
+    width: 100%;
+    padding: .5rem .75rem;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color .15s;
+}
+
+.form-group input:focus {
+    border-color: var(--yellow-500);
+    box-shadow: 0 0 0 3px rgba(234,179,8,.15);
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+.btn {
+    display: inline-block;
+    padding: .55rem 1.25rem;
+    border-radius: var(--radius);
+    font-size: .95rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background .15s;
+    width: 100%;
+    margin-top: .5rem;
+}
+
+.btn-primary {
+    background: var(--yellow-600);
+    color: var(--white);
+}
+
+.btn-primary:hover { background: var(--yellow-700); }
+
+/* ── Alerts ───────────────────────────────────────────────────────────────── */
+.alert {
+    padding: .75rem 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    font-size: .875rem;
+}
+
+.alert-error {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+/* ── Page header ──────────────────────────────────────────────────────────── */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.page-subtitle {
+    color: var(--gray-500);
+    margin-top: .25rem;
+    font-size: .95rem;
+}
+
+/* ── Orders table ─────────────────────────────────────────────────────────── */
+.orders-table-wrapper {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .9rem;
+}
+
+.orders-table thead {
+    background: var(--yellow-50);
+    border-bottom: 2px solid var(--yellow-400);
+}
+
+.orders-table th {
+    text-align: left;
+    padding: .75rem 1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    white-space: nowrap;
+}
+
+.orders-table td {
+    padding: .75rem 1rem;
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--gray-800);
+    vertical-align: middle; /* ← add this */
+}
+
+.orders-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.orders-table tbody tr:hover {
+    background: var(--yellow-50);
+}
+
+.order-id {
+    font-weight: 600;
+    font-family: monospace;
+}
+
+.table-link {
+    color: var(--yellow-700);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* ── Badges ───────────────────────────────────────────────────────────────── */
+.badge {
+    display: inline-block;
+    padding: .2rem .6rem;
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.badge-saved    { background: var(--gray-100);   color: var(--gray-500); }
+.badge-reviewed { background: var(--yellow-100); color: var(--yellow-700); }
+.badge-ordered  { background: #dcfce7;           color: #15803d; }
+
+/* ── Orders footer ────────────────────────────────────────────────────────── */
+.orders-footer {
+    margin-top: 1.25rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ── Buttons (outline variant) ────────────────────────────────────────────── */
+.btn-outline {
+    background: transparent;
+    color: var(--yellow-700);
+    border: 1.5px solid var(--yellow-600);
+    width: auto;
+}
+
+.btn-outline:hover {
+    background: var(--yellow-50);
+    text-decoration: none;
+}
+
+/* ── Empty state ──────────────────────────────────────────────────────────── */
+.empty-state {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: .5rem;
+}
+
+.empty-sub {
+    color: var(--gray-500);
+    margin-bottom: 1.5rem;
+}
+
+.empty-state .btn {
+    width: auto;
+}
+
+/* ── Detail grid ──────────────────────────────────────────────────────────── */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .detail-grid { grid-template-columns: 1fr 2fr; }
+}
+
+.detail-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--yellow-400);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 0;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: .9rem;
+}
+
+.detail-row:last-child { border-bottom: none; }
+
+.detail-label { color: var(--gray-500); }
+.detail-value { font-weight: 500; }
+
+/* ── Form actions ─────────────────────────────────────────────────────────── */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.form-error {
+    color: #b91c1c;
+    font-size: .8rem;
+    margin-top: .25rem;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: .5rem .75rem;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color .15s;
+    background: var(--white);
+}
+
+.form-control:focus {
+    border-color: var(--yellow-500);
+    box-shadow: 0 0 0 3px rgba(234,179,8,.15);
+}
+
+/* ── Product formset ──────────────────────────────────────────────────────── */
+.product-form {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: var(--gray-100);
+}
+
+.product-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .75rem;
+}
+
+.product-form-title {
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--gray-800);
+}
+
+.delete-label {
+    font-size: .85rem;
+    color: #b91c1c;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+}
+
+.product-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 600px) {
+    .product-form-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Danger button ────────────────────────────────────────────────────────── */
+.btn-danger {
+    background: #dc2626;
+    color: var(--white);
+    width: auto;
+}
+
+.btn-danger:hover { background: #b91c1c; }
+
+/* ── Table actions ────────────────────────────────────────────────────────── */
+.table-actions a {
+	margin-left: 1rem;
+}
+.table-link-danger { color: #b91c1c; }
+
+/* ── Header actions ───────────────────────────────────────────────────────── */
+.header-actions { display: flex; gap: .75rem; }
+
+/* ── Pagination ───────────────────────────────────────────────────────────── */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.page-link {
+    color: var(--yellow-700);
+    font-weight: 500;
+}
+
+.page-current {
+    color: var(--gray-500);
+    font-size: .9rem;
+}
+
+/* ── Back link ────────────────────────────────────────────────────────────── */
+.back-link {
+    margin-top: 1.5rem;
+}
+
+.back-link a {
+    color: var(--gray-500);
+    font-size: .9rem;
+}
+
+/* ── Language switcher ────────────────────────────────────────────────────── */
+.lang-switcher select {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.4);
+    color: var(--white);
+    padding: .25rem .5rem;
+    border-radius: var(--radius);
+    font-size: .85rem;
+    font-family: var(--font);
+    cursor: pointer;
+    outline: none;
+}
+
+.lang-switcher select option {
+    background: var(--yellow-700);
+    color: var(--white);
+}
+
+.lang-switcher select:hover {
+    border-color: rgba(255,255,255,.8);
+}

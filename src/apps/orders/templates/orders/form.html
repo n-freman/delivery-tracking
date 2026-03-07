@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">{{ title }}</h1>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="detail-card">
+            <h2 class="card-title">{% trans "Order Details" %}</h2>
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <span class="form-error">{{ field.errors.0 }}</span>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="detail-card">
+            <h2 class="card-title">{% trans "Products" %}</h2>
+            {{ product_formset.management_form }}
+
+            <div id="formset-container">
+                {% for pform in product_formset %}
+                <div class="product-form {% if pform.instance.pk %}existing{% endif %}">
+                    <div class="product-form-header">
+                        <span class="product-form-title">{% trans "Product" %} {{ forloop.counter }}</span>
+                        {% if product_formset.can_delete %}
+                        <label class="delete-label">
+                            {{ pform.DELETE }} {% trans "Remove" %}
+                        </label>
+                        {% endif %}
+                    </div>
+                    <div class="product-form-grid">
+                        {% for field in pform.visible_fields %}
+                            {% if field.name != "DELETE" %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <span class="form-error">{{ field.errors.0 }}</span>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% for field in pform.hidden_fields %}{{ field }}{% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <button type="button" class="btn btn-outline" id="add-product">
+                + {% trans "Add Product" %}
+            </button>
+        </div>
+
+        <div class="form-actions">
+            <a href="{% url 'orders:list' %}" class="btn btn-outline">{% trans "Cancel" %}</a>
+            <button type="submit" class="btn btn-primary">{% trans "Save Order" %}</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const container = document.getElementById("formset-container");
+    const addBtn = document.getElementById("add-product");
+    const totalForms = document.getElementById("id_products-TOTAL_FORMS");
+
+    addBtn.addEventListener("click", () => {
+        const formCount = parseInt(totalForms.value);
+        const lastForm = container.querySelector(".product-form:last-child");
+        const newForm = lastForm.cloneNode(true);
+
+        newForm.querySelectorAll("input, select, textarea").forEach(el => {
+            el.name = el.name.replace(/-\d+-/, `-${formCount}-`);
+            el.id   = el.id.replace(/-\d+-/, `-${formCount}-`);
+            if (el.type !== "checkbox") el.value = "";
+        });
+
+        newForm.querySelector(".product-form-title").textContent =
+            `{% trans "Product" %} ${formCount + 1}`;
+
+        container.appendChild(newForm);
+        totalForms.value = formCount + 1;
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | DMCargo{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">DMCargo — Delivery Tracking</a>
+</h1>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    :root {
+        --primary: #ca8a04;
+        --secondary: #a16207;
+    }
+
+    #header {
+        background: #ca8a04;
+    }
+
+    #header a:link,
+    #header a:visited {
+        color: #fff;
+    }
+
+    div.breadcrumbs {
+        background: #a16207;
+        color: #fff;
+    }
+
+    div.breadcrumbs a {
+        color: #fef9c3;
+    }
+
+    .module h2, .module caption, .inline-group h2 {
+        background: #ca8a04;
+    }
+
+    a:link, a:visited {
+        color: #a16207;
+    }
+
+    .button, input[type=submit], input[type=button], .submit-row input, a.button {
+        background: #ca8a04;
+        border-color: #a16207;
+    }
+
+    .button:hover, input[type=submit]:hover {
+        background: #a16207;
+    }
+</style>
+{% endblock %}

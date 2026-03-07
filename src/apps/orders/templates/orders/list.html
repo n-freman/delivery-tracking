@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "My Orders" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">{% trans "My Orders" %}</h1>
+            <p class="page-subtitle">{% trans "Manage all your orders." %}</p>
+        </div>
+        <a href="{% url 'orders:create' %}" class="btn btn-primary">+ {% trans "New Order" %}</a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% if orders %}
+        <div class="orders-table-wrapper">
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>{% trans "Order ID" %}</th>
+                        <th>{% trans "Delivery" %}</th>
+                        <th>{% trans "Payment" %}</th>
+                        <th>{% trans "Status" %}</th>
+                        <th>{% trans "Products" %}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td class="order-id">{{ order.public_id }}</td>
+                        <td>{{ order.get_delivery_type_display }}</td>
+                        <td>{{ order.get_payment_type_display }}</td>
+                        <td>
+                            <span class="badge badge-{{ order.status|lower }}">
+                                {{ order.get_status_display }}
+                            </span>
+                        </td>
+                        <td>{{ order.products.count }}</td>
+                        <td class="table-actions">
+                            <a href="{% url 'orders:detail' order.pk %}" class="table-link">{% trans "View" %}</a>
+                            <a href="{% url 'orders:edit' order.pk %}" class="table-link">{% trans "Edit" %}</a>
+                            <a href="{% url 'orders:delete' order.pk %}" class="table-link table-link-danger">{% trans "Delete" %}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="page-link">← {% trans "Previous" %}</a>
+            {% endif %}
+            <span class="page-current">{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link">{% trans "Next" %} →</a>
+            {% endif %}
+        </div>
+        {% endif %}
+
+    {% else %}
+        <div class="empty-state">
+            <p class="empty-title">{% trans "No orders yet." %}</p>
+            <p class="empty-sub">{% trans "Create your first order to get started." %}</p>
+            <a href="{% url 'orders:create' %}" class="btn btn-primary">+ {% trans "New Order" %}</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
