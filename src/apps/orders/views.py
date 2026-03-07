@@ -10,7 +10,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
 from apps.orders.forms import OrderForm, ProductFormSet
-from apps.orders.models import Order
+from apps.orders.models import Order, OrderStatusChoices
 
 
 class OrderListView(LoginRequiredMixin, ListView):
@@ -61,7 +61,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
 
         form.instance.ordered_by = self.request.user
         form.instance.public_id = secrets.token_urlsafe(6).upper()
-
+        form.instance.status = OrderStatusChoices.SAVED
         if product_formset.is_valid():
             self.object = form.save()
             product_formset.instance = self.object
@@ -95,7 +95,7 @@ class OrderUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         product_formset = context["product_formset"]
-
+        form.instance.status = OrderStatusChoices.SAVED
         if product_formset.is_valid():
             self.object = form.save()
             product_formset.instance = self.object
