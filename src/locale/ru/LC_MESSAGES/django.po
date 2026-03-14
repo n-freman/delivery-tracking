@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-07 15:56+0500\n"
+"POT-Creation-Date: 2026-03-14 04:54+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: apps/authentication/templates/auth/login.html:4
 #: apps/authentication/templates/auth/login.html:9
 #: apps/authentication/templates/auth/login.html:38
-#: templates/partials/header.html:10
+#: templates/partials/header.html:26
 msgid "Login"
 msgstr "Войти"
 
@@ -54,7 +54,7 @@ msgstr "Последние заказы"
 #: apps/general/templates/general/index.html:15
 #: apps/general/templates/general/index.html:64
 #: apps/orders/templates/orders/list.html:13
-#: apps/orders/templates/orders/list.html:74 apps/orders/views.py:46
+#: apps/orders/templates/orders/list.html:74 apps/orders/views.py:42
 msgid "New Order"
 msgstr "Новый заказ"
 
@@ -74,13 +74,13 @@ msgid "Payment"
 msgstr "Оплата"
 
 #: apps/general/templates/general/index.html:27
-#: apps/orders/templates/orders/detail.html:31
+#: apps/orders/templates/orders/detail.html:33
 #: apps/orders/templates/orders/list.html:30
 msgid "Status"
 msgstr "Статус"
 
 #: apps/general/templates/general/index.html:28
-#: apps/orders/templates/orders/detail.html:37
+#: apps/orders/templates/orders/detail.html:43
 #: apps/orders/templates/orders/form.html:35
 #: apps/orders/templates/orders/list.html:31
 msgid "Products"
@@ -94,6 +94,7 @@ msgstr "Посмотреть"
 #: apps/general/templates/general/index.html:56
 msgid "View all orders"
 msgstr "Посмотреть все заказы"
+
 #: apps/general/templates/general/index.html:61
 #: apps/orders/templates/orders/list.html:72
 msgid "No orders yet."
@@ -104,27 +105,27 @@ msgstr "Заказов пока нет."
 msgid "Create your first order to get started."
 msgstr "Создайте первый заказ, чтобы начать."
 
-#: apps/orders/admin.py:11 apps/products/models.py:56
+#: apps/orders/admin.py:12 apps/products/models.py:61
 msgid "product"
 msgstr "товар"
 
-#: apps/orders/admin.py:12 apps/products/models.py:57
+#: apps/orders/admin.py:13 apps/products/models.py:62
 msgid "products"
 msgstr "товары"
 
-#: apps/orders/admin.py:23 apps/products/admin.py:13
+#: apps/orders/admin.py:30 apps/products/admin.py:21
 msgid "General"
 msgstr "Общее"
 
-#: apps/orders/admin.py:26 apps/orders/templates/orders/form.html:22
+#: apps/orders/admin.py:31 apps/orders/templates/orders/form.html:22
 msgid "Order Details"
 msgstr "Детали заказа"
 
-#: apps/orders/forms.py:23
+#: apps/orders/forms.py:25
 msgid "Product title"
 msgstr "Название товара"
 
-#: apps/orders/forms.py:26
+#: apps/orders/forms.py:35
 msgid "Optional notes"
 msgstr "Примечания (необязательно)"
 
@@ -154,7 +155,7 @@ msgstr "Сохранён"
 
 #: apps/orders/models.py:21
 msgid "Reviewed"
-msgstr "На рассмотрении"
+msgstr "Рассмотрен"
 
 #: apps/orders/models.py:22
 msgid "Ordered"
@@ -172,43 +173,43 @@ msgstr "Пользователь, оформивший заказ."
 msgid "public ID"
 msgstr "публичный ID"
 
-#: apps/orders/models.py:38
+#: apps/orders/models.py:39
 msgid "A unique public-facing identifier for this order (max 16 characters)."
 msgstr "Уникальный публичный идентификатор заказа (не более 16 символов)."
 
-#: apps/orders/models.py:44
+#: apps/orders/models.py:46
 msgid "delivery type"
 msgstr "тип доставки"
 
-#: apps/orders/models.py:45
+#: apps/orders/models.py:47
 msgid "The method used to deliver this order (Avia, Express, or Auto)."
 msgstr "Способ доставки заказа (Авиа, Экспресс или Авто)."
 
-#: apps/orders/models.py:51
+#: apps/orders/models.py:53
 msgid "payment type"
 msgstr "тип оплаты"
 
-#: apps/orders/models.py:52
+#: apps/orders/models.py:54
 msgid "Whether the order is paid in full or in two installments (Half)."
 msgstr "Оплата полная или частичная (в рассрочку)."
 
-#: apps/orders/models.py:58
+#: apps/orders/models.py:60
 msgid "status"
 msgstr "статус"
 
-#: apps/orders/models.py:59
+#: apps/orders/models.py:61
 msgid "Current processing status of the order."
 msgstr "Текущий статус обработки заказа."
 
-#: apps/orders/models.py:63 apps/products/models.py:46
+#: apps/orders/models.py:65 apps/products/models.py:49
 msgid "order"
 msgstr "заказ"
 
-#: apps/orders/models.py:64
+#: apps/orders/models.py:66
 msgid "orders"
 msgstr "заказы"
 
-#: apps/orders/models.py:72
+#: apps/orders/models.py:74
 #, python-format
 msgid "Order %(public_id)s by %(user)s"
 msgstr "Заказ %(public_id)s от %(user)s"
@@ -237,7 +238,7 @@ msgid "Cancel"
 msgstr "Отмена"
 
 #: apps/orders/templates/orders/confirm_delete.html:20
-#: apps/orders/templates/orders/detail.html:15
+#: apps/orders/templates/orders/detail.html:16
 #: apps/orders/templates/orders/list.html:50
 msgid "Delete"
 msgstr "Удалить"
@@ -247,44 +248,87 @@ msgstr "Удалить"
 msgid "Order"
 msgstr "Заказ"
 
-#: apps/orders/templates/orders/detail.html:14
+#: apps/orders/templates/orders/detail.html:15
 #: apps/orders/templates/orders/list.html:49
 msgid "Edit"
 msgstr "Изменить"
 
-#: apps/orders/templates/orders/detail.html:21
+#: apps/orders/templates/orders/detail.html:23
 msgid "Order Info"
 msgstr "Информация о заказе"
 
-#: apps/orders/templates/orders/detail.html:23
+#: apps/orders/templates/orders/detail.html:25
 msgid "Delivery Type"
 msgstr "Тип доставки"
 
-#: apps/orders/templates/orders/detail.html:27
+#: apps/orders/templates/orders/detail.html:29
 msgid "Payment Type"
 msgstr "Тип оплаты"
 
-#: apps/orders/templates/orders/detail.html:42
+#: apps/orders/templates/orders/detail.html:37
+msgid "Exchange Rate"
+msgstr "Курс обмена"
+
+#: apps/orders/templates/orders/detail.html:49
 msgid "Title"
 msgstr "Название"
 
-#: apps/orders/templates/orders/detail.html:43
+#: apps/orders/templates/orders/detail.html:50
+msgid "Image"
+msgstr "Изображение"
+
+#: apps/orders/templates/orders/detail.html:51
 msgid "Amount"
 msgstr "Количество"
 
-#: apps/orders/templates/orders/detail.html:44
+#: apps/orders/templates/orders/detail.html:52
 msgid "Expected Price"
 msgstr "Ожидаемая цена"
 
-#: apps/orders/templates/orders/detail.html:45
+#: apps/orders/templates/orders/detail.html:53
 msgid "Actual Price"
 msgstr "Фактическая цена"
 
-#: apps/orders/templates/orders/detail.html:60
+#: apps/orders/templates/orders/detail.html:76
 msgid "No products in this order."
 msgstr "В этом заказе нет товаров."
 
-#: apps/orders/templates/orders/detail.html:66
+#: apps/orders/templates/orders/detail.html:83
+msgid "Price Summary"
+msgstr "Цены"
+
+#: apps/orders/templates/orders/detail.html:86
+#: apps/orders/templates/orders/detail.html:90
+msgid "Total Expected"
+msgstr "Ожидаемая сумма"
+
+#: apps/orders/templates/orders/detail.html:95
+#: apps/orders/templates/orders/detail.html:99
+msgid "Total Actual"
+msgstr "Фактическая сумма"
+
+#: apps/orders/templates/orders/detail.html:105
+#, python-format
+msgid ""
+"\n"
+"                Rate applied: %(rate)s TMT per ¥ (based on your payment "
+"type)\n"
+"            "
+msgstr ""
+"\n"
+"                Применённый курс: %(rate)s TMT за ¥ (в зависимости от типа "
+"оплаты)\n"
+"            "
+
+#: apps/orders/templates/orders/detail.html:115
+msgid "Your order has been reviewed. Please confirm to place it for ordering."
+msgstr "Ваш заказ рассмотрен. Подтвердите, чтобы оформить его."
+
+#: apps/orders/templates/orders/detail.html:120
+msgid "Confirm & Place Order"
+msgstr "Подтвердить и оформить заказ"
+
+#: apps/orders/templates/orders/detail.html:127
 msgid "Back to orders"
 msgstr "Назад к заказам"
 
@@ -330,11 +374,11 @@ msgstr "из"
 msgid "Next"
 msgstr "Вперёд"
 
-#: apps/orders/views.py:64
+#: apps/orders/views.py:62
 msgid "Order created successfully."
 msgstr "Заказ успешно создан."
 
-#: apps/orders/views.py:81
+#: apps/orders/views.py:79
 msgid "Edit Order"
 msgstr "Редактировать заказ"
 
@@ -346,88 +390,94 @@ msgstr "Заказ успешно обновлён."
 msgid "Order deleted successfully."
 msgstr "Заказ успешно удалён."
 
-#: apps/products/admin.py:16
+#: apps/orders/views.py:169
+#, python-format
+msgid "Your order %(id)s has been confirmed and sent for processing."
+msgstr "Ваш заказ %(id)s подтверждён и отправлен в обработку."
+
+#: apps/products/admin.py:22
 msgid "Pricing"
 msgstr "Цены"
 
-#: apps/products/admin.py:19
+#: apps/products/admin.py:23
 msgid "Additional"
 msgstr "Дополнительно"
 
-#: apps/products/models.py:9
+#: apps/products/models.py:10
 msgid "title"
 msgstr "название"
 
-#: apps/products/models.py:10
+#: apps/products/models.py:11
 msgid "The name or title of the product (max 120 characters)."
 msgstr "Название товара (не более 120 символов)."
 
-#: apps/products/models.py:14
+#: apps/products/models.py:15
 msgid "image"
 msgstr "изображение"
 
-#: apps/products/models.py:15
+#: apps/products/models.py:16
 msgid "Product image file."
 msgstr "Файл изображения товара."
 
-#: apps/products/models.py:19
+#: apps/products/models.py:20
 msgid "amount"
 msgstr "количество"
 
-#: apps/products/models.py:20
+#: apps/products/models.py:21
 msgid "Quantity of this product in the order."
 msgstr "Количество данного товара в заказе."
 
-#: apps/products/models.py:25
+#: apps/products/models.py:26
 msgid "expected price"
 msgstr "ожидаемая цена"
 
-#: apps/products/models.py:26
+#: apps/products/models.py:27
 msgid "The anticipated price of the product before confirmation."
 msgstr "Предполагаемая цена товара до подтверждения."
 
-#: apps/products/models.py:33
+#: apps/products/models.py:34
 msgid "actual price"
 msgstr "фактическая цена"
 
-#: apps/products/models.py:34
+#: apps/products/models.py:36
 msgid "The final confirmed price of the product. Leave blank if not yet known."
-msgstr "Окончательная подтверждённая цена товара. Оставьте пустым, если неизвестна."
+msgstr ""
+"Окончательная подтверждённая цена товара. Оставьте пустым, если неизвестна."
 
-#: apps/products/models.py:39
+#: apps/products/models.py:42
 msgid "notes"
 msgstr "примечания"
 
-#: apps/products/models.py:40
+#: apps/products/models.py:43
 msgid "Any additional notes or remarks about this product."
 msgstr "Любые дополнительные заметки или комментарии о товаре."
 
-#: apps/products/models.py:47
+#: apps/products/models.py:50
 msgid "The order this product belongs to."
 msgstr "Заказ, к которому относится данный товар."
 
-#: apps/products/models.py:51
+#: apps/products/models.py:54
 msgid "include in order"
 msgstr "включить в заказ"
 
-#: apps/products/models.py:52
+#: apps/products/models.py:56
 msgid "Whether this product should be included when processing the order."
 msgstr "Следует ли включать этот товар при обработке заказа."
 
-#: apps/products/models.py:64
+#: apps/products/models.py:69
 #, python-format
 msgid "%(title)s (x%(amount)s)"
 msgstr "%(title)s (x%(amount)s)"
 
-#: core/settings.py:125
+#: core/settings.py:129
 msgid "English"
 msgstr "Английский"
 
-#: core/settings.py:126
+#: core/settings.py:130
 msgid "Russian"
 msgstr "Русский"
 
-#: core/settings.py:127
+#: core/settings.py:131
 msgid "Turkmen"
 msgstr "Туркменский"
 
@@ -439,7 +489,6 @@ msgstr "Отслеживание доставки"
 msgid "All rights reserved."
 msgstr "Все права защищены."
 
-#: templates/partials/header.html:8
+#: templates/partials/header.html:24
 msgid "Logout"
 msgstr "Выйти"
-

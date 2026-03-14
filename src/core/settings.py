@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-6@1mowf$ua@-ijd6alb4lqb^5x@)+4ygs3cv@mdv!()3lmzw89
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") in ["True", "true", "1"]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     "apps.products",
     "apps.authentication",
     "apps.general",
+    # Third-party apps
+    "constance",
+    "constance.backends.database",
 ]
 
 MIDDLEWARE = [
@@ -157,3 +160,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_ADMIN_CHAT_ID = os.getenv("TELEGRAM_ADMIN_CHAT_ID")
+
+CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
+
+CONSTANCE_CONFIG = {
+    "CNY_TO_TMT_FULL": (3.0, "Exchange rate for full payment (CNY to TMT)"),
+    "CNY_TO_TMT_HALF": (3.3, "Exchange rate for half payment (CNY to TMT)"),
+}

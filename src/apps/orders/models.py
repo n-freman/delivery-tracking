@@ -20,6 +20,7 @@ class OrderStatusChoices(models.TextChoices):
     SAVED = "SAVED", _("Saved")
     REVIEWED = "REVIEWED", _("Reviewed")
     ORDERED = "ORDERED", _("Ordered")
+    DELIVERED = "DELIVERED", _("Delivered")
 
 
 class Order(models.Model):

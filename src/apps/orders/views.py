@@ -1,16 +1,20 @@
 import secrets
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
+from django.views import View
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
+from apps.general.telegram import send_telegram_message
 from apps.orders.forms import OrderForm, ProductFormSet
-from apps.orders.models import Order, OrderStatusChoices
+from apps.orders.models import Order, OrderStatusChoices, PaymentTypeChoices
+from apps.orders.utils import calculate_totals
 
 
 class OrderListView(LoginRequiredMixin, ListView):
@@ -24,17 +28,6 @@ class OrderListView(LoginRequiredMixin, ListView):
             Order.objects.filter(ordered_by=self.request.user)
             .prefetch_related("products")
             .order_by("-id")
-        )
-
-
-class OrderDetailView(LoginRequiredMixin, DetailView):
-    model = Order
-    template_name = "orders/detail.html"
-    context_object_name = "order"
-
-    def get_queryset(self):
-        return Order.objects.filter(ordered_by=self.request.user).prefetch_related(
-            "products"
         )
 
 
@@ -118,3 +111,62 @@ class OrderDeleteView(LoginRequiredMixin, DeleteView):
     def form_valid(self, form):
         messages.success(self.request, _("Order deleted successfully."))
         return super().form_valid(form)
+
+
+class OrderDetailView(LoginRequiredMixin, DetailView):
+    model = Order
+    template_name = "orders/detail.html"
+    context_object_name = "order"
+
+    def get_queryset(self):
+        return Order.objects.filter(ordered_by=self.request.user).prefetch_related(
+            "products"
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["totals"] = calculate_totals(self.object)
+        context["can_confirm"] = self.object.status == OrderStatusChoices.REVIEWED
+        return context
+
+
+class OrderConfirmView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        order = get_object_or_404(
+            Order,
+            pk=pk,
+            ordered_by=request.user,
+            status=OrderStatusChoices.REVIEWED,
+        )
+
+        order.status = OrderStatusChoices.ORDERED
+        order.save()
+
+        totals = calculate_totals(order)
+
+        text = (
+            f"✅ <b>Заказ подтверждён пользователем</b>\n\n"
+            f"🆔 Номер заказа: <code>{order.public_id}</code>\n"
+            f"👤 Пользователь: {order.ordered_by}\n"
+            f"🚚 Доставка: {order.get_delivery_type_display()}\n"
+            f"💳 Оплата: {order.get_payment_type_display()}\n\n"
+            f"💰 Итого (ожидаемая цена): {totals['total_expected_cny']:.2f} ¥ "
+            f"= {totals['total_expected_tmt']:.2f} TMT\n"
+        )
+
+        if totals["has_actual"]:
+            text += (
+                f"💰 Итого (фактическая цена): {totals['total_actual_cny']:.2f} ¥ "
+                f"= {totals['total_actual_tmt']:.2f} TMT\n"
+            )
+
+        text += f"📊 Курс: {totals['rate']} TMT/¥\n"
+
+        send_telegram_message(settings.TELEGRAM_ADMIN_CHAT_ID, text)
+
+        messages.success(
+            request,
+            _("Your order %(id)s has been confirmed and sent for processing.")
+            % {"id": order.public_id},
+        )
+        return redirect("orders:detail", pk=pk)

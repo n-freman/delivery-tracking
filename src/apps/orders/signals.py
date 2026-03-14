@@ -1,9 +1,9 @@
+from django.conf import settings
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from django.conf import settings
 
-from apps.orders.models import Order, OrderStatusChoices
 from apps.general.telegram import send_telegram_message
+from apps.orders.models import Order, OrderStatusChoices
 
 
 @receiver(post_save, sender=Order)

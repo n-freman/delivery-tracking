@@ -11,8 +11,10 @@
             <span class="badge badge-{{ order.status|lower }}">{{ order.get_status_display }}</span>
         </div>
         <div class="header-actions">
-            <a href="{% url 'orders:edit' order.pk %}" class="btn btn-outline">{% trans "Edit" %}</a>
-            <a href="{% url 'orders:delete' order.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
+            {% if order.status == "SAVED" %}
+                <a href="{% url 'orders:edit' order.pk %}" class="btn btn-outline">{% trans "Edit" %}</a>
+                <a href="{% url 'orders:delete' order.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
+            {% endif %}
         </div>
     </div>
 
@@ -31,36 +33,95 @@
                 <span class="detail-label">{% trans "Status" %}</span>
                 <span class="detail-value">{{ order.get_status_display }}</span>
             </div>
+            <div class="detail-row">
+                <span class="detail-label">{% trans "Exchange Rate" %}</span>
+                <span class="detail-value">{{ totals.rate }} TMT/¥</span>
+            </div>
         </div>
 
         <div class="detail-card">
             <h2 class="card-title">{% trans "Products" %}</h2>
             {% if order.products.all %}
-                <table class="orders-table">
-                    <thead>
-                        <tr>
-                            <th>{% trans "Title" %}</th>
-                            <th>{% trans "Amount" %}</th>
-                            <th>{% trans "Expected Price" %}</th>
-                            <th>{% trans "Actual Price" %}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for product in order.products.all %}
-                        <tr>
-                            <td>{{ product.title }}</td>
-                            <td>{{ product.amount }}</td>
-                            <td>{{ product.expected_price }}</td>
-                            <td>{{ product.actual_price|default:"—" }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+				<div class="orders-table-wrapper">
+                	<table class="orders-table">
+                	    <thead>
+                	        <tr>
+                	            <th>{% trans "Title" %}</th>
+								<th>{% trans "Image" %}</th>
+                	            <th>{% trans "Amount" %}</th>
+                	            <th>{% trans "Expected Price" %} (¥)</th>
+                	            <th>{% trans "Actual Price" %} (¥)</th>
+                	        </tr>
+                	    </thead>
+                	    <tbody>
+                	        {% for product in order.products.all %}
+                	        <tr>
+                	            <td>{{ product.title }}</td>
+								<td>
+					                {% if product.image %}
+					                    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-thumb" height="100">
+					                {% else %}
+					                    —
+					                {% endif %}
+					            </td>
+                	            <td>{{ product.amount }}</td>
+                	            <td>{{ product.expected_price }}</td>
+                	            <td>{{ product.actual_price|default:"—" }}</td>
+                	        </tr>
+                	        {% endfor %}
+                	    </tbody>
+                	</table>
+				</div>
             {% else %}
                 <p class="empty-sub">{% trans "No products in this order." %}</p>
             {% endif %}
         </div>
     </div>
+
+    <!-- Totals -->
+    <div class="detail-card totals-card">
+        <h2 class="card-title">{% trans "Price Summary" %}</h2>
+        <div class="totals-grid">
+        	<div class="total-block">
+        	    <span class="total-label">{% trans "Total Expected" %} (¥)</span>
+        	    <span class="total-value">{{ totals.total_expected_cny|floatformat:2 }} ¥</span>
+        	</div>
+        	<div class="total-block total-block-highlight">
+        	    <span class="total-label">{% trans "Total Expected" %} (TMT)</span>
+        	    <span class="total-value">{{ totals.total_expected_tmt|floatformat:2 }} TMT</span>
+        	</div>
+        	{% if totals.has_actual %}
+        	<div class="total-block total-actual">
+        	    <span class="total-label">{% trans "Total Actual" %} (¥)</span>
+        	    <span class="total-value">{{ totals.total_actual_cny|floatformat:2 }} ¥</span>
+        	</div>
+        	<div class="total-block total-block-highlight total-actual">
+        	    <span class="total-label">{% trans "Total Actual" %} (TMT)</span>
+        	    <span class="total-value">{{ totals.total_actual_tmt|floatformat:2 }} TMT</span>
+        	</div>
+        	{% endif %}
+        </div>
+        <p class="rate-note">
+            {% blocktrans with rate=totals.rate %}
+                Rate applied: {{ rate }} TMT per ¥ (based on your payment type)
+            {% endblocktrans %}
+        </p>
+    </div>
+
+    <!-- Confirm button -->
+    {% if can_confirm %}
+    <div class="confirm-section">
+        <div class="confirm-notice">
+            🔔 {% trans "Your order has been reviewed. Please confirm to place it for ordering." %}
+        </div>
+        <form method="post" action="{% url 'orders:confirm' order.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-confirm">
+                ✅ {% trans "Confirm & Place Order" %}
+            </button>
+        </form>
+    </div>
+    {% endif %}
 
     <div class="back-link">
         <a href="{% url 'orders:list' %}">← {% trans "Back to orders" %}</a>
