@@ -1,5 +1,6 @@
 import secrets
 
+from constance import config
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -40,6 +41,8 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("New Order")
+        context["rate_full"] = config.CNY_TO_TMT_FULL
+        context["rate_half"] = config.CNY_TO_TMT_HALF
         if self.request.POST:
             context["product_formset"] = ProductFormSet(
                 self.request.POST, self.request.FILES
@@ -72,11 +75,16 @@ class OrderUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("orders:list")
 
     def get_queryset(self):
-        return Order.objects.filter(ordered_by=self.request.user)
+        return Order.objects.filter(
+            ordered_by=self.request.user,
+            status__in=[OrderStatusChoices.SAVED, OrderStatusChoices.REVIEWED],
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Edit Order")
+        context["rate_full"] = config.CNY_TO_TMT_FULL
+        context["rate_half"] = config.CNY_TO_TMT_HALF
         if self.request.POST:
             context["product_formset"] = ProductFormSet(
                 self.request.POST, self.request.FILES, instance=self.object
@@ -106,7 +114,10 @@ class OrderDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = "order"
 
     def get_queryset(self):
-        return Order.objects.filter(ordered_by=self.request.user)
+        return Order.objects.filter(
+            ordered_by=self.request.user,
+            status__in=[OrderStatusChoices.SAVED, OrderStatusChoices.REVIEWED],
+        )
 
     def form_valid(self, form):
         messages.success(self.request, _("Order deleted successfully."))

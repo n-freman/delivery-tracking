@@ -13,7 +13,7 @@ def get_exchange_rate(payment_type: str) -> Decimal:
 
 def calculate_totals(order) -> dict:
     rate = get_exchange_rate(order.payment_type)
-    products = order.products.filter(include_in_order=True)
+    products = list(order.products.filter(include_in_order=True))
 
     total_expected_cny = sum(p.expected_price * p.amount for p in products)
     total_actual_cny = sum(
@@ -22,6 +22,7 @@ def calculate_totals(order) -> dict:
 
     return {
         "rate": rate,
+        "products": products,
         "total_expected_cny": total_expected_cny,
         "total_actual_cny": total_actual_cny,
         "total_expected_tmt": total_expected_cny * rate,

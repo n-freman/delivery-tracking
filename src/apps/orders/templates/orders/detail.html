@@ -11,12 +11,108 @@
             <span class="badge badge-{{ order.status|lower }}">{{ order.get_status_display }}</span>
         </div>
         <div class="header-actions">
-            {% if order.status == "SAVED" %}
-                <a href="{% url 'orders:edit' order.pk %}" class="btn btn-outline">{% trans "Edit" %}</a>
-                <a href="{% url 'orders:delete' order.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
+            {% if order.status == "SAVED" or order.status == "REVIEWED" %}
+                <a href="{% url 'orders:edit' order.pk %}" class="btn btn-outline">
+                    <span class="material-icons btn-icon">edit</span>
+                    {% trans "Edit" %}
+                </a>
+                <a href="{% url 'orders:delete' order.pk %}" class="btn btn-danger">
+                    <span class="material-icons btn-icon">delete</span>
+                    {% trans "Delete" %}
+                </a>
             {% endif %}
         </div>
     </div>
+    <div class="status-stepper">
+        {% with statuses="SAVED,REVIEWED,ORDERED,DELIVERED" %}
+
+        <div class="step {% if order.status == 'SAVED' %}step-active{% elif order.status == 'REVIEWED' or order.status == 'ORDERED' or order.status == 'DELIVERED' %}step-done{% endif %}">
+            <div class="step-circle">
+                {% if order.status == 'REVIEWED' or order.status == 'ORDERED' or order.status == 'DELIVERED' %}
+                    <span class="material-icons">check</span>
+                {% else %}
+                    <span class="material-icons">edit_note</span>
+                {% endif %}
+            </div>
+            <span class="step-label">{% trans "Saved" %}</span>
+        </div>
+
+        <div class="step-line {% if order.status == 'REVIEWED' or order.status == 'ORDERED' or order.status == 'DELIVERED' %}step-line-done{% endif %}"></div>
+
+        <div class="step {% if order.status == 'REVIEWED' %}step-active{% elif order.status == 'ORDERED' or order.status == 'DELIVERED' %}step-done{% endif %}">
+            <div class="step-circle">
+                {% if order.status == 'ORDERED' or order.status == 'DELIVERED' %}
+                    <span class="material-icons">check</span>
+                {% else %}
+                    <span class="material-icons">rate_review</span>
+                {% endif %}
+            </div>
+            <span class="step-label">{% trans "Reviewed" %}</span>
+        </div>
+
+        <div class="step-line {% if order.status == 'ORDERED' or order.status == 'DELIVERED' %}step-line-done{% endif %}"></div>
+
+        <div class="step {% if order.status == 'ORDERED' %}step-active{% elif order.status == 'DELIVERED' %}step-done{% endif %}">
+            <div class="step-circle">
+                {% if order.status == 'DELIVERED' %}
+                    <span class="material-icons">check</span>
+                {% else %}
+                    <span class="material-icons">inventory_2</span>
+                {% endif %}
+            </div>
+            <span class="step-label">{% trans "Ordered" %}</span>
+        </div>
+
+        <div class="step-line {% if order.status == 'DELIVERED' %}step-line-done{% endif %}"></div>
+
+        <div class="step {% if order.status == 'DELIVERED' %}step-done{% endif %}">
+            <div class="step-circle">
+                {% if order.status == 'DELIVERED' %}
+                    <span class="material-icons">check</span>
+                {% else %}
+                    <span class="material-icons">local_shipping</span>
+                {% endif %}
+            </div>
+            <span class="step-label">{% trans "Delivered" %}</span>
+        </div>
+
+        {% endwith %}
+    </div>
+    {% if order.status == "SAVED" %}
+    <div class="status-info-box status-info-saved">
+        <span class="material-icons status-info-icon">hourglass_empty</span>
+        <div class="status-info-content">
+            <p class="status-info-title">{% trans "Your order is being reviewed." %}</p>
+            <p class="status-info-text">
+                {% trans "Our team is currently reviewing your order and will provide actual prices shortly. You will be notified as soon as it is ready for confirmation." %}
+            </p>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if order.status == "ORDERED" %}
+    <div class="status-info-box status-info-ordered">
+        <span class="material-icons status-info-icon">inventory_2</span>
+        <div class="status-info-content">
+            <p class="status-info-title">{% trans "Your order has been placed." %}</p>
+            <p class="status-info-text">
+                {% trans "Your order has been confirmed and is now being processed. We will update you once it is on its way." %}
+            </p>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if order.status == "DELIVERED" %}
+    <div class="status-info-box status-info-delivered">
+        <span class="material-icons status-info-icon">check_circle</span>
+        <div class="status-info-content">
+            <p class="status-info-title">{% trans "Your order has been delivered." %}</p>
+            <p class="status-info-text">
+                {% trans "This order has been successfully delivered. Thank you for using DMCargo." %}
+            </p>
+        </div>
+    </div>
+    {% endif %}
 
     <div class="detail-grid">
         <div class="detail-card">
@@ -42,64 +138,105 @@
         <div class="detail-card">
             <h2 class="card-title">{% trans "Products" %}</h2>
             {% if order.products.all %}
-				<div class="orders-table-wrapper">
-                	<table class="orders-table">
-                	    <thead>
-                	        <tr>
-                	            <th>{% trans "Title" %}</th>
-								<th>{% trans "Image" %}</th>
-                	            <th>{% trans "Amount" %}</th>
-                	            <th>{% trans "Expected Price" %} (¥)</th>
-                	            <th>{% trans "Actual Price" %} (¥)</th>
-                	        </tr>
-                	    </thead>
-                	    <tbody>
-                	        {% for product in order.products.all %}
-                	        <tr>
-                	            <td>{{ product.title }}</td>
-								<td>
-					                {% if product.image %}
-					                    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-thumb" height="100">
-					                {% else %}
-					                    —
-					                {% endif %}
-					            </td>
-                	            <td>{{ product.amount }}</td>
-                	            <td>{{ product.expected_price }}</td>
-                	            <td>{{ product.actual_price|default:"—" }}</td>
-                	        </tr>
-                	        {% endfor %}
-                	    </tbody>
-                	</table>
-				</div>
+            <div class="orders-table-wrapper">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>{% trans "Image" %}</th>
+                            <th>{% trans "Title" %}</th>
+                            <th>{% trans "Amount" %}</th>
+                            <th>{% trans "Expected" %} (¥)</th>
+                            {% if totals.has_actual %}
+                            <th>{% trans "Actual" %} (¥)</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in order.products.all %}
+                        <tr>
+                            <td>
+                                {% if product.image %}
+                                    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-thumb" height="100">
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.amount }}</td>
+                            <td>{{ product.expected_price }}</td>
+                            {% if totals.has_actual %}
+                            <td>{{ product.actual_price|default:"—" }}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             {% else %}
                 <p class="empty-sub">{% trans "No products in this order." %}</p>
             {% endif %}
         </div>
     </div>
 
+    {% if can_confirm %}
+    <div class="confirm-section confirm-section-prominent">
+        <div class="confirm-header">
+            <span class="material-icons confirm-icon">task_alt</span>
+            <div>
+                <p class="confirm-title">{% trans "Ready to place your order?" %}</p>
+                <p class="confirm-subtitle">
+                    {% trans "We have reviewed your order and confirmed the actual prices. Please check the price summary below and confirm if you are happy to proceed." %}
+                </p>
+            </div>
+        </div>
+        <div class="confirm-totals">
+            <div class="confirm-total-item">
+                <span class="confirm-total-label">{% trans "Total to pay" %} (TMT)</span>
+                <span class="confirm-total-value">
+                    {% if totals.has_actual %}
+                        {{ totals.total_actual_tmt|floatformat:2 }} TMT
+                    {% else %}
+                        {{ totals.total_expected_tmt|floatformat:2 }} TMT
+                    {% endif %}
+                </span>
+            </div>
+            <div class="confirm-total-item">
+                <span class="confirm-total-label">{% trans "Rate applied" %}</span>
+                <span class="confirm-total-value">{{ totals.rate }} TMT / ¥</span>
+            </div>
+        </div>
+        <form method="post" action="{% url 'orders:confirm' order.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-confirm btn-confirm-large">
+                <span class="material-icons">check_circle</span>
+                {% trans "Confirm & Place Order" %}
+            </button>
+        </form>
+    </div>
+    {% endif %}
+
     <!-- Totals -->
     <div class="detail-card totals-card">
         <h2 class="card-title">{% trans "Price Summary" %}</h2>
         <div class="totals-grid">
-        	<div class="total-block">
-        	    <span class="total-label">{% trans "Total Expected" %} (¥)</span>
-        	    <span class="total-value">{{ totals.total_expected_cny|floatformat:2 }} ¥</span>
-        	</div>
-        	<div class="total-block total-block-highlight">
-        	    <span class="total-label">{% trans "Total Expected" %} (TMT)</span>
-        	    <span class="total-value">{{ totals.total_expected_tmt|floatformat:2 }} TMT</span>
-        	</div>
-        	{% if totals.has_actual %}
-        	<div class="total-block total-actual">
-        	    <span class="total-label">{% trans "Total Actual" %} (¥)</span>
-        	    <span class="total-value">{{ totals.total_actual_cny|floatformat:2 }} ¥</span>
-        	</div>
-        	<div class="total-block total-block-highlight total-actual">
-        	    <span class="total-label">{% trans "Total Actual" %} (TMT)</span>
-        	    <span class="total-value">{{ totals.total_actual_tmt|floatformat:2 }} TMT</span>
-        	</div>
-        	{% endif %}
+            <div class="total-block">
+                <span class="total-label">{% trans "Total Expected" %} (¥)</span>
+                <span class="total-value">{{ totals.total_expected_cny|floatformat:2 }} ¥</span>
+            </div>
+            <div class="total-block total-block-highlight">
+                <span class="total-label">{% trans "Total Expected" %} (TMT)</span>
+                <span class="total-value">{{ totals.total_expected_tmt|floatformat:2 }} TMT</span>
+            </div>
+            {% if totals.has_actual %}
+            <div class="total-block total-actual">
+                <span class="total-label">{% trans "Total Actual" %} (¥)</span>
+                <span class="total-value">{{ totals.total_actual_cny|floatformat:2 }} ¥</span>
+            </div>
+            <div class="total-block total-block-highlight total-actual">
+                <span class="total-label">{% trans "Total Actual" %} (TMT)</span>
+                <span class="total-value">{{ totals.total_actual_tmt|floatformat:2 }} TMT</span>
+            </div>
+            {% endif %}
         </div>
         <p class="rate-note">
             {% blocktrans with rate=totals.rate %}
@@ -108,23 +245,11 @@
         </p>
     </div>
 
-    <!-- Confirm button -->
-    {% if can_confirm %}
-    <div class="confirm-section">
-        <div class="confirm-notice">
-            🔔 {% trans "Your order has been reviewed. Please confirm to place it for ordering." %}
-        </div>
-        <form method="post" action="{% url 'orders:confirm' order.pk %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-confirm">
-                ✅ {% trans "Confirm & Place Order" %}
-            </button>
-        </form>
-    </div>
-    {% endif %}
-
     <div class="back-link">
-        <a href="{% url 'orders:list' %}">← {% trans "Back to orders" %}</a>
+        <a href="{% url 'orders:list' %}">
+            <span class="material-icons back-icon">arrow_back</span>
+            {% trans "Back to orders" %}
+        </a>
     </div>
 </div>
 {% endblock %}

@@ -16,8 +16,14 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-actions">
-                    <a href="{% url 'orders:list' %}" class="btn btn-outline">{% trans "Cancel" %}</a>
-                    <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
+                    <a href="{% url 'orders:list' %}" class="btn btn-outline">
+                        <span class="material-icons btn-icon">close</span>
+                        {% trans "Cancel" %}
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <span class="material-icons btn-icon">delete_forever</span>
+                        {% trans "Delete" %}
+                    </button>
                 </div>
             </form>
         </div>

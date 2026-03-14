@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-14 04:54+0500\n"
+"POT-Creation-Date: 2026-03-14 14:01+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: apps/authentication/templates/auth/login.html:4
 #: apps/authentication/templates/auth/login.html:9
 #: apps/authentication/templates/auth/login.html:38
-#: templates/partials/header.html:26
+#: templates/partials/header.html:21
 msgid "Login"
 msgstr ""
 
@@ -37,6 +37,18 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: apps/general/templates/general/404.html:11
+msgid "Page not found."
+msgstr ""
+
+#: apps/general/templates/general/404.html:12
+msgid "The page you are looking for does not exist or has been moved."
+msgstr ""
+
+#: apps/general/templates/general/404.html:15
+msgid "Go to Home page"
+msgstr ""
+
 #: apps/general/templates/general/index.html:4
 msgid "Home"
 msgstr ""
@@ -49,57 +61,61 @@ msgstr ""
 msgid "Here are your recent orders."
 msgstr ""
 
-#: apps/general/templates/general/index.html:15
-#: apps/general/templates/general/index.html:64
-#: apps/orders/templates/orders/list.html:13
-#: apps/orders/templates/orders/list.html:74 apps/orders/views.py:42
+#: apps/general/templates/general/index.html:16
+#: apps/general/templates/general/index.html:70
+#: apps/orders/templates/orders/list.html:15
+#: apps/orders/templates/orders/list.html:92 apps/orders/views.py:43
 msgid "New Order"
 msgstr ""
 
-#: apps/general/templates/general/index.html:24
-#: apps/orders/templates/orders/list.html:27
+#: apps/general/templates/general/index.html:25
+#: apps/orders/templates/orders/list.html:30
 msgid "Order ID"
 msgstr ""
 
-#: apps/general/templates/general/index.html:25
-#: apps/orders/templates/orders/list.html:28
+#: apps/general/templates/general/index.html:26
+#: apps/orders/templates/orders/list.html:31
 msgid "Delivery"
 msgstr ""
 
-#: apps/general/templates/general/index.html:26
-#: apps/orders/templates/orders/list.html:29
+#: apps/general/templates/general/index.html:27
+#: apps/orders/templates/orders/list.html:32
 msgid "Payment"
 msgstr ""
 
-#: apps/general/templates/general/index.html:27
-#: apps/orders/templates/orders/detail.html:33
-#: apps/orders/templates/orders/list.html:30
+#: apps/general/templates/general/index.html:28
+#: apps/orders/templates/orders/detail.html:129
+#: apps/orders/templates/orders/list.html:33
 msgid "Status"
 msgstr ""
 
-#: apps/general/templates/general/index.html:28
-#: apps/orders/templates/orders/detail.html:43
-#: apps/orders/templates/orders/form.html:35
-#: apps/orders/templates/orders/list.html:31
+#: apps/general/templates/general/index.html:29
+#: apps/orders/templates/orders/detail.html:139
+#: apps/orders/templates/orders/form.html:72
+#: apps/orders/templates/orders/list.html:34
 msgid "Products"
 msgstr ""
 
-#: apps/general/templates/general/index.html:46
-#: apps/orders/templates/orders/list.html:48
+#: apps/general/templates/general/index.html:44
+#: apps/orders/templates/orders/list.html:54
+msgid "Action required"
+msgstr ""
+
+#: apps/general/templates/general/index.html:50
 msgid "View"
 msgstr ""
 
-#: apps/general/templates/general/index.html:56
+#: apps/general/templates/general/index.html:61
 msgid "View all orders"
 msgstr ""
 
-#: apps/general/templates/general/index.html:61
-#: apps/orders/templates/orders/list.html:72
+#: apps/general/templates/general/index.html:66
+#: apps/orders/templates/orders/list.html:90
 msgid "No orders yet."
 msgstr ""
 
-#: apps/general/templates/general/index.html:62
-#: apps/orders/templates/orders/list.html:73
+#: apps/general/templates/general/index.html:67
+#: apps/orders/templates/orders/list.html:91
 msgid "Create your first order to get started."
 msgstr ""
 
@@ -115,7 +131,7 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: apps/orders/admin.py:31 apps/orders/templates/orders/form.html:22
+#: apps/orders/admin.py:31 apps/orders/templates/orders/form.html:59
 msgid "Order Details"
 msgstr ""
 
@@ -147,67 +163,71 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: apps/orders/models.py:20
+#: apps/orders/models.py:20 apps/orders/templates/orders/detail.html:37
 msgid "Saved"
 msgstr ""
 
-#: apps/orders/models.py:21
+#: apps/orders/models.py:21 apps/orders/templates/orders/detail.html:50
 msgid "Reviewed"
 msgstr ""
 
-#: apps/orders/models.py:22
+#: apps/orders/models.py:22 apps/orders/templates/orders/detail.html:63
 msgid "Ordered"
 msgstr ""
 
-#: apps/orders/models.py:32
-msgid "ordered by"
+#: apps/orders/models.py:23 apps/orders/templates/orders/detail.html:76
+msgid "Delivered"
 msgstr ""
 
 #: apps/orders/models.py:33
+msgid "ordered by"
+msgstr ""
+
+#: apps/orders/models.py:34
 msgid "The user who placed this order."
 msgstr ""
 
-#: apps/orders/models.py:37
+#: apps/orders/models.py:38
 msgid "public ID"
 msgstr ""
 
-#: apps/orders/models.py:39
+#: apps/orders/models.py:40
 msgid "A unique public-facing identifier for this order (max 16 characters)."
 msgstr ""
 
-#: apps/orders/models.py:46
+#: apps/orders/models.py:47
 msgid "delivery type"
 msgstr ""
 
-#: apps/orders/models.py:47
+#: apps/orders/models.py:48
 msgid "The method used to deliver this order (Avia, Express, or Auto)."
 msgstr ""
 
-#: apps/orders/models.py:53
+#: apps/orders/models.py:54
 msgid "payment type"
 msgstr ""
 
-#: apps/orders/models.py:54
+#: apps/orders/models.py:55
 msgid "Whether the order is paid in full or in two installments (Half)."
 msgstr ""
 
-#: apps/orders/models.py:60
+#: apps/orders/models.py:61
 msgid "status"
 msgstr ""
 
-#: apps/orders/models.py:61
+#: apps/orders/models.py:62
 msgid "Current processing status of the order."
 msgstr ""
 
-#: apps/orders/models.py:65 apps/products/models.py:49
+#: apps/orders/models.py:66 apps/products/models.py:49
 msgid "order"
 msgstr ""
 
-#: apps/orders/models.py:66
+#: apps/orders/models.py:67
 msgid "orders"
 msgstr ""
 
-#: apps/orders/models.py:74
+#: apps/orders/models.py:75
 #, python-format
 msgid "Order %(public_id)s by %(user)s"
 msgstr ""
@@ -226,14 +246,13 @@ msgid ""
 "                "
 msgstr ""
 
-#: apps/orders/templates/orders/confirm_delete.html:19
-#: apps/orders/templates/orders/form.html:73
+#: apps/orders/templates/orders/confirm_delete.html:21
+#: apps/orders/templates/orders/form.html:113
 msgid "Cancel"
 msgstr ""
 
-#: apps/orders/templates/orders/confirm_delete.html:20
-#: apps/orders/templates/orders/detail.html:16
-#: apps/orders/templates/orders/list.html:50
+#: apps/orders/templates/orders/confirm_delete.html:25
+#: apps/orders/templates/orders/detail.html:21
 msgid "Delete"
 msgstr ""
 
@@ -242,66 +261,116 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:15
-#: apps/orders/templates/orders/list.html:49
+#: apps/orders/templates/orders/detail.html:17
 msgid "Edit"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:23
+#: apps/orders/templates/orders/detail.html:85
+msgid "Your order is being reviewed."
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:87
+msgid ""
+"Our team is currently reviewing your order and will provide actual prices "
+"shortly. You will be notified as soon as it is ready for confirmation."
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:97
+msgid "Your order has been placed."
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:99
+msgid ""
+"Your order has been confirmed and is now being processed. We will update you "
+"once it is on its way."
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:109
+msgid "Your order has been delivered."
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:111
+msgid ""
+"This order has been successfully delivered. Thank you for using DMCargo."
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:119
 msgid "Order Info"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:25
+#: apps/orders/templates/orders/detail.html:121
 msgid "Delivery Type"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:29
+#: apps/orders/templates/orders/detail.html:125
 msgid "Payment Type"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:37
+#: apps/orders/templates/orders/detail.html:133
 msgid "Exchange Rate"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:49
-msgid "Title"
-msgstr ""
-
-#: apps/orders/templates/orders/detail.html:50
+#: apps/orders/templates/orders/detail.html:145
 msgid "Image"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:51
+#: apps/orders/templates/orders/detail.html:146
+msgid "Title"
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:147
 msgid "Amount"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:52
-msgid "Expected Price"
+#: apps/orders/templates/orders/detail.html:148
+msgid "Expected"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:53
-msgid "Actual Price"
+#: apps/orders/templates/orders/detail.html:150
+msgid "Actual"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:76
+#: apps/orders/templates/orders/detail.html:176
 msgid "No products in this order."
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:83
+#: apps/orders/templates/orders/detail.html:186
+msgid "Ready to place your order?"
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:188
+msgid ""
+"We have reviewed your order and confirmed the actual prices. Please check "
+"the price summary below and confirm if you are happy to proceed."
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:194
+msgid "Total to pay"
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:204
+msgid "Rate applied"
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:212
+msgid "Confirm & Place Order"
+msgstr ""
+
+#: apps/orders/templates/orders/detail.html:220
 msgid "Price Summary"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:86
-#: apps/orders/templates/orders/detail.html:90
+#: apps/orders/templates/orders/detail.html:223
+#: apps/orders/templates/orders/detail.html:227
 msgid "Total Expected"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:95
-#: apps/orders/templates/orders/detail.html:99
+#: apps/orders/templates/orders/detail.html:232
+#: apps/orders/templates/orders/detail.html:236
 msgid "Total Actual"
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:105
+#: apps/orders/templates/orders/detail.html:242
 #, python-format
 msgid ""
 "\n"
@@ -310,32 +379,67 @@ msgid ""
 "            "
 msgstr ""
 
-#: apps/orders/templates/orders/detail.html:115
-msgid "Your order has been reviewed. Please confirm to place it for ordering."
-msgstr ""
-
-#: apps/orders/templates/orders/detail.html:120
-msgid "Confirm & Place Order"
-msgstr ""
-
-#: apps/orders/templates/orders/detail.html:127
+#: apps/orders/templates/orders/detail.html:251
 msgid "Back to orders"
 msgstr ""
 
+#: apps/orders/templates/orders/form.html:20
+msgid "Exchange rates (CNY → TMT)"
+msgstr ""
+
+#: apps/orders/templates/orders/form.html:23
+#: apps/orders/templates/orders/form.html:41
+msgid "Full payment"
+msgstr ""
+
+#: apps/orders/templates/orders/form.html:28
+#: apps/orders/templates/orders/form.html:45
+msgid "Half payment"
+msgstr ""
+
+#: apps/orders/templates/orders/form.html:34
+msgid ""
+"\n"
+"                        Product prices are set in Chinese Yuan (¥). We "
+"convert them to Turkmen Manat (TMT)\n"
+"                        using one of two rates depending on your chosen "
+"payment type.\n"
+"                    "
+msgstr ""
+
 #: apps/orders/templates/orders/form.html:42
-#: apps/orders/templates/orders/form.html:98
+msgid ""
+"You pay the entire amount upfront before the order is placed. This gives you "
+"the more favorable rate."
+msgstr ""
+
+#: apps/orders/templates/orders/form.html:46
+#, python-format
+msgid ""
+"You pay 50%% now and the remaining 50%% upon delivery. A slightly higher "
+"rate applies due to the deferred payment."
+msgstr ""
+
+#: apps/orders/templates/orders/form.html:50
+msgid ""
+"The total price in TMT will be shown on your order page once the admin "
+"confirms the actual prices."
+msgstr ""
+
+#: apps/orders/templates/orders/form.html:79
+#: apps/orders/templates/orders/form.html:142
 msgid "Product"
 msgstr ""
 
-#: apps/orders/templates/orders/form.html:45
+#: apps/orders/templates/orders/form.html:82
 msgid "Remove"
 msgstr ""
 
-#: apps/orders/templates/orders/form.html:68
+#: apps/orders/templates/orders/form.html:106
 msgid "Add Product"
 msgstr ""
 
-#: apps/orders/templates/orders/form.html:74
+#: apps/orders/templates/orders/form.html:117
 msgid "Save Order"
 msgstr ""
 
@@ -348,39 +452,43 @@ msgstr ""
 msgid "Manage all your orders."
 msgstr ""
 
-#: apps/orders/templates/orders/list.html:61
+#: apps/orders/templates/orders/list.html:35
+msgid "Actions"
+msgstr ""
+
+#: apps/orders/templates/orders/list.html:79
 msgid "Previous"
 msgstr ""
 
-#: apps/orders/templates/orders/list.html:63
+#: apps/orders/templates/orders/list.html:81
 msgid "Page"
 msgstr ""
 
-#: apps/orders/templates/orders/list.html:63
+#: apps/orders/templates/orders/list.html:81
 msgid "of"
 msgstr ""
 
-#: apps/orders/templates/orders/list.html:65
+#: apps/orders/templates/orders/list.html:83
 msgid "Next"
 msgstr ""
 
-#: apps/orders/views.py:62
+#: apps/orders/views.py:65
 msgid "Order created successfully."
 msgstr ""
 
-#: apps/orders/views.py:79
+#: apps/orders/views.py:85
 msgid "Edit Order"
 msgstr ""
 
-#: apps/orders/views.py:96
+#: apps/orders/views.py:104
 msgid "Order updated successfully."
 msgstr ""
 
-#: apps/orders/views.py:112
+#: apps/orders/views.py:123
 msgid "Order deleted successfully."
 msgstr ""
 
-#: apps/orders/views.py:169
+#: apps/orders/views.py:180
 #, python-format
 msgid "Your order %(id)s has been confirmed and sent for processing."
 msgstr ""
@@ -478,6 +586,6 @@ msgstr ""
 msgid "All rights reserved."
 msgstr ""
 
-#: templates/partials/header.html:24
+#: templates/partials/header.html:16
 msgid "Logout"
 msgstr ""

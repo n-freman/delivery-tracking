@@ -14,7 +14,44 @@
             <div class="alert alert-{{ message.tags }}">{{ message }}</div>
         {% endfor %}
     {% endif %}
-
+    <div class="rate-info-box">
+        <span class="rate-info-icon">info</span>
+        <div class="rate-info-content">
+            <p class="rate-info-title">{% trans "Exchange rates (CNY → TMT)" %}</p>
+            <div class="rate-info-rates">
+                <div class="rate-info-item">
+                    <span class="rate-info-label">{% trans "Full payment" %}</span>
+                    <span class="rate-info-value">{{ rate_full }} TMT / ¥</span>
+                </div>
+                <div class="rate-info-divider"></div>
+                <div class="rate-info-item">
+                    <span class="rate-info-label">{% trans "Half payment" %}</span>
+                    <span class="rate-info-value">{{ rate_half }} TMT / ¥</span>
+                </div>
+            </div>
+            <div class="rate-info-explanation">
+                <p>
+                    {% blocktrans with full=rate_full half=rate_half %}
+                        Product prices are set in Chinese Yuan (¥). We convert them to Turkmen Manat (TMT)
+                        using one of two rates depending on your chosen payment type.
+                    {% endblocktrans %}
+                </p>
+                <ul>
+                    <li>
+                        <strong>{% trans "Full payment" %} — {{ rate_full }} TMT/¥:</strong>
+                        {% trans "You pay the entire amount upfront before the order is placed. This gives you the more favorable rate." %}
+                    </li>
+                    <li>
+                        <strong>{% trans "Half payment" %} — {{ rate_half }} TMT/¥:</strong>
+                        {% trans "You pay 50% now and the remaining 50% upon delivery. A slightly higher rate applies due to the deferred payment." %}
+                    </li>
+                </ul>
+                <p class="rate-info-note">
+                    {% trans "The total price in TMT will be shown on your order page once the admin confirms the actual prices." %}
+                </p>
+            </div>
+        </div>
+    </div>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -65,13 +102,20 @@
             </div>
 
             <button type="button" class="btn btn-outline" id="add-product">
-                + {% trans "Add Product" %}
+                <span class="material-icons btn-icon">add_circle_outline</span>
+                {% trans "Add Product" %}
             </button>
         </div>
 
         <div class="form-actions">
-            <a href="{% url 'orders:list' %}" class="btn btn-outline">{% trans "Cancel" %}</a>
-            <button type="submit" class="btn btn-primary">{% trans "Save Order" %}</button>
+            <a href="{% url 'orders:list' %}" class="btn btn-outline">
+                <span class="material-icons btn-icon">close</span>
+                {% trans "Cancel" %}
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <span class="material-icons btn-icon">save</span>
+                {% trans "Save Order" %}
+            </button>
         </div>
     </form>
 </div>

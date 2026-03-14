@@ -12,7 +12,8 @@
             <p class="page-subtitle">{% trans "Here are your recent orders." %}</p>
         </div>
         <a href="{% url 'orders:create' %}" class="btn btn-primary">
-            + {% trans "New Order" %}
+            <span class="material-icons btn-icon">add</span>
+            {% trans "New Order" %}
         </a>
     </div>
 
@@ -39,6 +40,9 @@
                             <span class="badge badge-{{ order.status|lower }}">
                                 {{ order.get_status_display }}
                             </span>
+                            {% if order.status == "REVIEWED" %}
+                                <span class="reviewed-dot" title="{% trans 'Action required' %}"></span>
+                            {% endif %}
                         </td>
                         <td>{{ order.products.count }}</td>
                         <td>
@@ -53,6 +57,7 @@
         </div>
         <div class="orders-footer">
             <a href="{% url 'orders:list' %}" class="btn btn-outline">
+                <span class="material-icons btn-icon">list</span>
                 {% trans "View all orders" %}
             </a>
         </div>
@@ -61,7 +66,8 @@
             <p class="empty-title">{% trans "No orders yet." %}</p>
             <p class="empty-sub">{% trans "Create your first order to get started." %}</p>
             <a href="{% url 'orders:create' %}" class="btn btn-primary">
-                + {% trans "New Order" %}
+                <span class="material-icons btn-icon">add</span>
+                {% trans "New Order" %}
             </a>
         </div>
     {% endif %}

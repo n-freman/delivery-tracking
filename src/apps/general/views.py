@@ -15,3 +15,7 @@ def index(request):
         "recent_orders": recent_orders,
     }
     return render(request, "general/index.html", context)
+
+
+def handler404(request, exception):
+    return render(request, "404.html", status=404)
