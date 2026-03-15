@@ -20,7 +20,7 @@ class OrderModelTest(TestCase):
             public_id="ORD-0001",
             delivery_type=DeliveryTypeChoice.AUTO,
             payment_type=PaymentTypeChoices.FULL,
-            status=OrderStatusChoices.SAVED,
+            status=OrderStatusChoices.ON_REVIEW,
         )
 
     # --- Creation ---
@@ -32,7 +32,7 @@ class OrderModelTest(TestCase):
         order = Order.objects.create(
             ordered_by=self.user,
             public_id="ORD-0002",
-            status=OrderStatusChoices.SAVED,
+            status=OrderStatusChoices.ON_REVIEW,
         )
         self.assertEqual(order.delivery_type, DeliveryTypeChoice.AUTO)
 
@@ -40,7 +40,7 @@ class OrderModelTest(TestCase):
         order = Order.objects.create(
             ordered_by=self.user,
             public_id="ORD-0003",
-            status=OrderStatusChoices.SAVED,
+            status=OrderStatusChoices.ON_REVIEW,
         )
         self.assertEqual(order.payment_type, PaymentTypeChoices.FULL)
 
@@ -49,7 +49,7 @@ class OrderModelTest(TestCase):
             ordered_by=self.user,
             public_id="ORD-0004",
         )
-        self.assertEqual(order.status, OrderStatusChoices.SAVED)
+        self.assertEqual(order.status, OrderStatusChoices.ON_REVIEW)
 
     # --- Field values ---
 
@@ -71,7 +71,7 @@ class OrderModelTest(TestCase):
             self.assertEqual(self.order.payment_type, choice)
 
     def test_order_status_choices(self):
-        for choice in [OrderStatusChoices.SAVED, OrderStatusChoices.REVIEWED, OrderStatusChoices.ORDERED]:
+        for choice in [OrderStatusChoices.ON_REVIEW, OrderStatusChoices.REVIEWED, OrderStatusChoices.ORDERED]:
             self.order.status = choice
             self.order.save()
             self.order.refresh_from_db()
@@ -94,8 +94,8 @@ class OrderModelTest(TestCase):
 
     def test_order_related_name(self):
         user = User.objects.create_user(username="user2", password="pass")
-        Order.objects.create(ordered_by=user, public_id="ORD-X1", status=OrderStatusChoices.SAVED)
-        Order.objects.create(ordered_by=user, public_id="ORD-X2", status=OrderStatusChoices.SAVED)
+        Order.objects.create(ordered_by=user, public_id="ORD-X1", status=OrderStatusChoices.ON_REVIEW)
+        Order.objects.create(ordered_by=user, public_id="ORD-X2", status=OrderStatusChoices.ON_REVIEW)
         self.assertEqual(user.orders.count(), 2)
 
     # --- Meta ---
@@ -127,7 +127,7 @@ class ProductModelTest(TestCase):
         self.order = Order.objects.create(
             ordered_by=self.user,
             public_id="ORD-0001",
-            status=OrderStatusChoices.SAVED,
+            status=OrderStatusChoices.ON_REVIEW,
         )
         self.product = Product.objects.create(
             title="Test Product",

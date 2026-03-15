@@ -17,7 +17,7 @@ class PaymentTypeChoices(models.TextChoices):
 
 
 class OrderStatusChoices(models.TextChoices):
-    SAVED = "SAVED", _("Saved")
+    ON_REVIEW = "ON_REVIEW", _("On review")
     REVIEWED = "REVIEWED", _("Reviewed")
     ORDERED = "ORDERED", _("Ordered")
     DELIVERED = "DELIVERED", _("Delivered")
@@ -57,7 +57,7 @@ class Order(models.Model):
     status = models.CharField(
         max_length=16,
         choices=OrderStatusChoices,
-        default=OrderStatusChoices.SAVED,
+        default=OrderStatusChoices.ON_REVIEW,
         verbose_name=_("status"),
         help_text=_("Current processing status of the order."),
     )

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DMCargo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-14 14:01+0500\n"
+"POT-Creation-Date: 2026-03-14 20:18+0500\n"
 "PO-Revision-Date: 2026-03-07 15:56+0500\n"
 "Last-Translator: DMCargo\n"
 "Language-Team: Turkmen\n"
@@ -160,17 +160,17 @@ msgstr "Ýarym"
 msgid "Full"
 msgstr "Doly"
 
-#: apps/orders/models.py:20 apps/orders/templates/orders/detail.html:37
-msgid "Saved"
-msgstr "Saklandy"
+#: apps/orders/models.py:20
+msgid "On review"
+msgstr "Barlagda"
 
 #: apps/orders/models.py:21 apps/orders/templates/orders/detail.html:50
 msgid "Reviewed"
-msgstr "Seredildi"
+msgstr "Barlandy"
 
 #: apps/orders/models.py:22 apps/orders/templates/orders/detail.html:63
 msgid "Ordered"
-msgstr "Sargyldy"
+msgstr "Sargydyldy"
 
 #: apps/orders/models.py:23 apps/orders/templates/orders/detail.html:76
 msgid "Delivered"
@@ -265,6 +265,10 @@ msgstr "Sargyt"
 #: apps/orders/templates/orders/detail.html:17
 msgid "Edit"
 msgstr "Redaktirlemek"
+
+#: apps/orders/templates/orders/detail.html:37
+msgid "Saved"
+msgstr "Saklandy"
 
 #: apps/orders/templates/orders/detail.html:85
 msgid "Your order is being reviewed."

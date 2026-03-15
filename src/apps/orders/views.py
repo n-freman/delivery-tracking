@@ -57,7 +57,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
 
         form.instance.ordered_by = self.request.user
         form.instance.public_id = secrets.token_urlsafe(6).upper()
-        form.instance.status = OrderStatusChoices.SAVED
+        form.instance.status = OrderStatusChoices.ON_REVIEW
         if product_formset.is_valid():
             self.object = form.save()
             product_formset.instance = self.object
@@ -77,7 +77,7 @@ class OrderUpdateView(LoginRequiredMixin, UpdateView):
     def get_queryset(self):
         return Order.objects.filter(
             ordered_by=self.request.user,
-            status__in=[OrderStatusChoices.SAVED, OrderStatusChoices.REVIEWED],
+            status__in=[OrderStatusChoices.ON_REVIEW, OrderStatusChoices.REVIEWED],
         )
 
     def get_context_data(self, **kwargs):
@@ -96,7 +96,7 @@ class OrderUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         product_formset = context["product_formset"]
-        form.instance.status = OrderStatusChoices.SAVED
+        form.instance.status = OrderStatusChoices.ON_REVIEW
         if product_formset.is_valid():
             self.object = form.save()
             product_formset.instance = self.object
@@ -116,7 +116,7 @@ class OrderDeleteView(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         return Order.objects.filter(
             ordered_by=self.request.user,
-            status__in=[OrderStatusChoices.SAVED, OrderStatusChoices.REVIEWED],
+            status__in=[OrderStatusChoices.ON_REVIEW, OrderStatusChoices.REVIEWED],
         )
 
     def form_valid(self, form):
@@ -172,7 +172,7 @@ class OrderConfirmView(LoginRequiredMixin, View):
             )
 
         text += f"📊 Курс: {totals['rate']} TMT/¥\n"
-
+        print("Sending telegram notification", settings.TELEGRAM_ADMIN_CHAT_ID)
         send_telegram_message(settings.TELEGRAM_ADMIN_CHAT_ID, text)
 
         messages.success(

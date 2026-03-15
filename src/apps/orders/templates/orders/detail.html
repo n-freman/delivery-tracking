@@ -11,7 +11,7 @@
             <span class="badge badge-{{ order.status|lower }}">{{ order.get_status_display }}</span>
         </div>
         <div class="header-actions">
-            {% if order.status == "SAVED" or order.status == "REVIEWED" %}
+            {% if order.status == "ON_REVIEW" or order.status == "REVIEWED" %}
                 <a href="{% url 'orders:edit' order.pk %}" class="btn btn-outline">
                     <span class="material-icons btn-icon">edit</span>
                     {% trans "Edit" %}
@@ -24,9 +24,9 @@
         </div>
     </div>
     <div class="status-stepper">
-        {% with statuses="SAVED,REVIEWED,ORDERED,DELIVERED" %}
+        {% with statuses="ON_REVIEW,REVIEWED,ORDERED,DELIVERED" %}
 
-        <div class="step {% if order.status == 'SAVED' %}step-active{% elif order.status == 'REVIEWED' or order.status == 'ORDERED' or order.status == 'DELIVERED' %}step-done{% endif %}">
+        <div class="step {% if order.status == 'ON_REVIEW' %}step-active{% elif order.status == 'REVIEWED' or order.status == 'ORDERED' or order.status == 'DELIVERED' %}step-done{% endif %}">
             <div class="step-circle">
                 {% if order.status == 'REVIEWED' or order.status == 'ORDERED' or order.status == 'DELIVERED' %}
                     <span class="material-icons">check</span>
@@ -34,7 +34,7 @@
                     <span class="material-icons">edit_note</span>
                 {% endif %}
             </div>
-            <span class="step-label">{% trans "Saved" %}</span>
+            <span class="step-label">{% trans "On review" %}</span>
         </div>
 
         <div class="step-line {% if order.status == 'REVIEWED' or order.status == 'ORDERED' or order.status == 'DELIVERED' %}step-line-done{% endif %}"></div>
@@ -78,7 +78,7 @@
 
         {% endwith %}
     </div>
-    {% if order.status == "SAVED" %}
+    {% if order.status == "ON_REVIEW" %}
     <div class="status-info-box status-info-saved">
         <span class="material-icons status-info-icon">hourglass_empty</span>
         <div class="status-info-content">

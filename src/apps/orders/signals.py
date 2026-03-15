@@ -8,7 +8,7 @@ from apps.orders.models import Order, OrderStatusChoices
 
 @receiver(post_save, sender=Order)
 def notify_admin_on_order_save(sender, instance, created, **kwargs):
-    if instance.status != OrderStatusChoices.SAVED:
+    if instance.status != OrderStatusChoices.ON_REVIEW:
         return
 
     text = (

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-14 14:01+0500\n"
+"POT-Creation-Date: 2026-03-14 20:18+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -165,9 +165,9 @@ msgstr "Частичная"
 msgid "Full"
 msgstr "Полная"
 
-#: apps/orders/models.py:20 apps/orders/templates/orders/detail.html:37
-msgid "Saved"
-msgstr "Сохранён"
+#: apps/orders/models.py:20
+msgid "On review"
+msgstr "На рассмотрении"
 
 #: apps/orders/models.py:21 apps/orders/templates/orders/detail.html:50
 msgid "Reviewed"
@@ -270,6 +270,10 @@ msgstr "Заказ"
 #: apps/orders/templates/orders/detail.html:17
 msgid "Edit"
 msgstr "Изменить"
+
+#: apps/orders/templates/orders/detail.html:37
+msgid "Saved"
+msgstr "Сохранён"
 
 #: apps/orders/templates/orders/detail.html:85
 msgid "Your order is being reviewed."
