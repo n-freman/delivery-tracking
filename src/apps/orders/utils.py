@@ -16,8 +16,10 @@ def calculate_totals(order) -> dict:
     products = list(order.products.filter(include_in_order=True))
 
     total_expected_cny = sum(p.expected_price * p.amount for p in products)
+
     total_actual_cny = sum(
-        p.actual_price * p.amount for p in products if p.actual_price is not None
+        (p.actual_price if p.actual_price is not None else p.expected_price) * p.amount
+        for p in products
     )
 
     return {

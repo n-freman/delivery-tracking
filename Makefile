@@ -19,6 +19,8 @@ help:
 	@echo "    migrate        Run database migrations"
 	@echo "    migrations     Create new migrations"
 	@echo "    collectstatic  Collect static files"
+	@echo "    messages       Extract translatable strings into .po files"
+	@echo "    compilemessages  Compile .po files into .mo files"
 	@echo ""
 	@echo "  Code Quality"
 	@echo "    lint           Check code with black and isort (no changes)"
@@ -29,13 +31,17 @@ help:
 	@echo "    test-app       Run tests for a specific app  (make test-app APP=orders)"
 	@echo "    test-cov       Run tests with coverage report"
 	@echo ""
-	@echo "  Deploy"
+	@echo "  Nginx"
 	@echo "    nginx-link     Symlink nginx config to sites-enabled"
 	@echo "    nginx-unlink   Remove nginx symlink from sites-enabled"
 	@echo "    nginx-test     Test nginx configuration"
 	@echo "    nginx-reload   Reload nginx"
-	@echo "    gunicorn       Start gunicorn server"
-	@echo "    deploy         Full deploy (migrate, collectstatic, nginx-reload)"
+	@echo ""
+	@echo "  Production"
+	@echo "    setup          Provision a fresh server (postgres, nginx, gunicorn, deps)"
+	@echo "    deploy         Release update (migrate, collectstatic, compilemessages, nginx-reload)"
+	@echo "    gunicorn       Start gunicorn server manually"
+	@echo "    restart        Restart gunicorn service and reload nginx"
 	@echo ""
 
 # ── Dev ───────────────────────────────────────────────────────────────────────
@@ -106,3 +112,11 @@ gunicorn:
 # ── Deploy ────────────────────────────────────────────────────────────────────
 deploy: migrate collectstatic nginx-test nginx-reload
 	@echo "Deploy complete."
+
+setup:
+	chmod +x configs/deploy/setup.sh
+	sudo configs/deploy/setup.sh
+
+restart:
+	sudo systemctl restart dmcargo
+	sudo nginx -s reload

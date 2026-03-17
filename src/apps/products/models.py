@@ -1,3 +1,5 @@
+import secrets
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -5,10 +7,10 @@ from apps.orders.models import Order
 
 
 class Product(models.Model):
-    title = models.CharField(
-        max_length=120,
-        verbose_name=_("title"),
-        help_text=_("The name or title of the product (max 120 characters)."),
+    short_id = models.CharField(
+        max_length=8,
+        verbose_name=_("Short ID"),
+        editable=False,
     )
     image = models.ImageField(
         upload_to="products",
@@ -49,6 +51,12 @@ class Product(models.Model):
         verbose_name=_("order"),
         help_text=_("The order this product belongs to."),
     )
+    link = models.URLField(
+        null=True,
+        blank=True,
+        verbose_name=_("product link"),
+        help_text=_("Link to the product page (e.g. Taobao, 1688, etc.)"),
+    )
     include_in_order = models.BooleanField(
         default=True,
         verbose_name=_("include in order"),
@@ -56,17 +64,30 @@ class Product(models.Model):
             "Whether this product should be included when processing the order."
         ),
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=_("created at"),
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_("updated at"),
+    )
 
     class Meta:
         verbose_name = _("product")
         verbose_name_plural = _("products")
-        ordering = ["title"]
+        ordering = ["-updated_at", "-created_at"]
         indexes = [
             models.Index(fields=["include_in_order"], name="product_include_idx"),
         ]
 
     def __str__(self):
-        return _("%(title)s (x%(amount)s)") % {
-            "title": self.title,
+        return _("%(short_id)s (x%(amount)s)") % {
+            "short_id": self.short_id,
             "amount": self.amount,
         }
+
+    def save(self, *args, **kwargs):
+        if not self.short_id:
+            self.short_id = secrets.token_urlsafe(4).upper()[:6]
+        super().save(*args, **kwargs)

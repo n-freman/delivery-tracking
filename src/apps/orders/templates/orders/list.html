@@ -41,7 +41,7 @@
                         <td class="order-id">
                             {{ order.public_id }}
                             {% if order.status == "REVIEWED" %}
-                                <span class="reviewed-dot"></span>
+                                <span class="reviewed-dot" title="{% trans 'Action required' %}"></span>
                             {% endif %}
                         </td>
                         <td>{{ order.get_delivery_type_display }}</td>

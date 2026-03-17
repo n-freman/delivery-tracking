@@ -365,9 +365,10 @@ a:hover {transform: scale(1.01); }
     letter-spacing: .04em;
 }
 
-.badge-saved    { background: var(--gray-100);   color: var(--gray-500); }
+.badge-on_review { background: var(--gray-100); color: var(--gray-500); }
 .badge-reviewed { background: var(--yellow-100); color: var(--yellow-700); }
-.badge-ordered  { background: #dcfce7;           color: #15803d; }
+.badge-ordered  { background: #dcfce7; color: #15803d; }
+.badge-delivered { background: #dbeafe; color: #1d4ed8; }
 
 /* ── Orders footer ────────────────────────────────────────────────────────── */
 .orders-footer {

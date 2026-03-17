@@ -142,31 +142,43 @@
                 <table class="orders-table">
                     <thead>
                         <tr>
+                            <th>{% trans "Short ID" %}</th>
                             <th>{% trans "Image" %}</th>
-                            <th>{% trans "Title" %}</th>
                             <th>{% trans "Amount" %}</th>
-                            <th>{% trans "Expected" %} (¥)</th>
-                            {% if totals.has_actual %}
-                            <th>{% trans "Actual" %} (¥)</th>
+                            {% if order.status == "ON_REVIEW" %}
+                                <th>{% trans "Expected" %} (¥)</th>
+                            {% else %}
+                                <th>{% trans "Actual" %} (¥)</th>
                             {% endif %}
+                            <th>{% trans "Link" %}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for product in order.products.all %}
+                        {% for product in totals.products %}
                         <tr>
+                            <td>{{ product.short_id }}</td>
                             <td>
                                 {% if product.image %}
-                                    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-thumb" height="100">
+                                    <img
+                                        src="{{ product.image.url }}"
+                                        alt="product"
+                                        class="product-thumb"
+                                        height="100" />
                                 {% else %}
                                     —
                                 {% endif %}
                             </td>
-                            <td>{{ product.title }}</td>
                             <td>{{ product.amount }}</td>
-                            <td>{{ product.expected_price }}</td>
-                            {% if totals.has_actual %}
-                            <td>{{ product.actual_price|default:"—" }}</td>
-                            {% endif %}
+                            <td>{{ product.actual_price|default:product.expected_price }}</td>
+                            <td>
+                                {% if product.link %}
+                                    <a href="{{ product.link }}" target="_blank" class="table-link">
+                                        <span class="material-icons">open_in_new</span>
+                                    </a>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -218,25 +230,29 @@
     <!-- Totals -->
     <div class="detail-card totals-card">
         <h2 class="card-title">{% trans "Price Summary" %}</h2>
-        <div class="totals-grid">
-            <div class="total-block">
-                <span class="total-label">{% trans "Total Expected" %} (¥)</span>
-                <span class="total-value">{{ totals.total_expected_cny|floatformat:2 }} ¥</span>
+        <div class="totals-scroll-wrapper">
+            <div class="totals-grid">
+                {% if order.status != "REVIEWED" and order.status != "ORDERED" and order.status != "DELIVERED" %}
+                <div class="total-block">
+                    <span class="total-label">{% trans "Total Expected" %} (¥)</span>
+                    <span class="total-value">{{ totals.total_expected_cny|floatformat:2 }} ¥</span>
+                </div>
+                <div class="total-block total-block-highlight">
+                    <span class="total-label">{% trans "Total Expected" %} (TMT)</span>
+                    <span class="total-value">{{ totals.total_expected_tmt|floatformat:2 }} TMT</span>
+                </div>
+                {% endif %}
+                {% if totals.has_actual %}
+                <div class="total-block">
+                    <span class="total-label">{% trans "Total Actual" %} (¥)</span>
+                    <span class="total-value">{{ totals.total_actual_cny|floatformat:2 }} ¥</span>
+                </div>
+                <div class="total-block total-block-highlight">
+                    <span class="total-label">{% trans "Total Actual" %} (TMT)</span>
+                    <span class="total-value">{{ totals.total_actual_tmt|floatformat:2 }} TMT</span>
+                </div>
+                {% endif %}
             </div>
-            <div class="total-block total-block-highlight">
-                <span class="total-label">{% trans "Total Expected" %} (TMT)</span>
-                <span class="total-value">{{ totals.total_expected_tmt|floatformat:2 }} TMT</span>
-            </div>
-            {% if totals.has_actual %}
-            <div class="total-block total-actual">
-                <span class="total-label">{% trans "Total Actual" %} (¥)</span>
-                <span class="total-value">{{ totals.total_actual_cny|floatformat:2 }} ¥</span>
-            </div>
-            <div class="total-block total-block-highlight total-actual">
-                <span class="total-label">{% trans "Total Actual" %} (TMT)</span>
-                <span class="total-value">{{ totals.total_actual_tmt|floatformat:2 }} TMT</span>
-            </div>
-            {% endif %}
         </div>
         <p class="rate-note">
             {% blocktrans with rate=totals.rate %}

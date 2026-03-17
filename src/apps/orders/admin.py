@@ -8,7 +8,15 @@ from apps.products.models import Product
 class ProductInline(admin.TabularInline):
     model = Product
     extra = 0
-    fields = ("title", "amount", "expected_price", "actual_price", "include_in_order")
+    readonly_fields = ("short_id",)
+    fields = (
+        "short_id",
+        "amount",
+        "expected_price",
+        "actual_price",
+        "include_in_order",
+        "link",
+    )
     verbose_name = _("product")
     verbose_name_plural = _("products")
 
@@ -24,7 +32,7 @@ class OrderAdmin(admin.ModelAdmin):
     )
     list_filter = ("status", "delivery_type", "payment_type")
     search_fields = ("public_id", "ordered_by__username")
-    ordering = ("-id",)
+    ordering = ("-updated_at", "-created_at")
     inlines = [ProductInline]
     fieldsets = (
         (_("General"), {"fields": ("ordered_by", "public_id")}),

@@ -98,6 +98,17 @@ DATABASES = {
     }
 }
 
+DATABASES = {
+    "default": {
+        "ENGINE": os.getenv("DB_ENGINE", default="django.db.backends.sqlite3"),
+        "NAME": os.getenv("DB_NAME", default=BASE_DIR / "db.sqlite3"),
+        "USER": os.getenv("DB_USER", default=""),
+        "PASSWORD": os.getenv("DB_PASSWORD", default=""),
+        "HOST": os.getenv("DB_HOST", default="localhost"),
+        "PORT": os.getenv("DB_PORT", default="5432"),
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -166,4 +177,12 @@ CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
 CONSTANCE_CONFIG = {
     "CNY_TO_TMT_FULL": (3.0, "Exchange rate for full payment (CNY to TMT)"),
     "CNY_TO_TMT_HALF": (3.3, "Exchange rate for half payment (CNY to TMT)"),
+    "TELEGRAM_ADMIN_CHAT_IDS": (
+        "",
+        "Telegram chat IDs to receive admin notifications (comma-separated, e.g. 123456,789012)",
+    ),
+    "BASE_URL": (
+        "",
+        "Base URL of the site (e.g. https://dmcargo.com), used for media links in Telegram",
+    ),
 }

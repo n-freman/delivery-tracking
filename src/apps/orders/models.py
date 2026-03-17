@@ -61,11 +61,19 @@ class Order(models.Model):
         verbose_name=_("status"),
         help_text=_("Current processing status of the order."),
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=_("created at"),
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_("updated at"),
+    )
 
     class Meta:
         verbose_name = _("order")
         verbose_name_plural = _("orders")
-        ordering = ["-id"]
+        ordering = ["-updated_at", "-created_at"]
         indexes = [
             models.Index(fields=["public_id"], name="order_public_id_idx"),
             models.Index(fields=["status"], name="order_status_idx"),

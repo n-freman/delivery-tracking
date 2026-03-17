@@ -7,16 +7,16 @@ from apps.products.models import Product
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
-        "title",
+        "short_id",
         "order",
         "amount",
         "expected_price",
         "actual_price",
+        "link",
         "include_in_order",
     )
-    list_filter = ("include_in_order",)
     search_fields = ("title", "order__public_id")
-    ordering = ("title",)
+    ordering = ("-created_at", "-updated_at")
     fieldsets = (
         (_("General"), {"fields": ("title", "image", "order")}),
         (_("Pricing"), {"fields": ("expected_price", "actual_price")}),

@@ -153,27 +153,27 @@ class OrderConfirmView(LoginRequiredMixin, View):
         order.status = OrderStatusChoices.ORDERED
         order.save()
 
-        totals = calculate_totals(order)
+        # totals = calculate_totals(order)
 
-        text = (
-            f"✅ <b>Заказ подтверждён пользователем</b>\n\n"
-            f"🆔 Номер заказа: <code>{order.public_id}</code>\n"
-            f"👤 Пользователь: {order.ordered_by}\n"
-            f"🚚 Доставка: {order.get_delivery_type_display()}\n"
-            f"💳 Оплата: {order.get_payment_type_display()}\n\n"
-            f"💰 Итого (ожидаемая цена): {totals['total_expected_cny']:.2f} ¥ "
-            f"= {totals['total_expected_tmt']:.2f} TMT\n"
-        )
+        # text = (
+        #     f"✅ <b>Заказ подтверждён пользователем</b>\n\n"
+        #     f"🆔 Номер заказа: <code>{order.public_id}</code>\n"
+        #     f"👤 Пользователь: {order.ordered_by}\n"
+        #     f"🚚 Доставка: {order.get_delivery_type_display()}\n"
+        #     f"💳 Оплата: {order.get_payment_type_display()}\n\n"
+        #     f"💰 Итого (ожидаемая цена): {totals['total_expected_cny']:.2f} ¥ "
+        #     f"= {totals['total_expected_tmt']:.2f} TMT\n"
+        # )
 
-        if totals["has_actual"]:
-            text += (
-                f"💰 Итого (фактическая цена): {totals['total_actual_cny']:.2f} ¥ "
-                f"= {totals['total_actual_tmt']:.2f} TMT\n"
-            )
+        # if totals["has_actual"]:
+        #     text += (
+        #         f"💰 Итого (фактическая цена): {totals['total_actual_cny']:.2f} ¥ "
+        #         f"= {totals['total_actual_tmt']:.2f} TMT\n"
+        #     )
 
-        text += f"📊 Курс: {totals['rate']} TMT/¥\n"
-        print("Sending telegram notification", settings.TELEGRAM_ADMIN_CHAT_ID)
-        send_telegram_message(settings.TELEGRAM_ADMIN_CHAT_ID, text)
+        # text += f"📊 Курс: {totals['rate']} TMT/¥\n"
+        # print("Sending telegram notification", settings.TELEGRAM_ADMIN_CHAT_ID)
+        # send_telegram_message(settings.TELEGRAM_ADMIN_CHAT_ID, text)
 
         messages.success(
             request,
