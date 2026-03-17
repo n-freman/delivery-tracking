@@ -45,7 +45,7 @@ echo "✅ PostgreSQL configured. DB: $DB_NAME, User: $DB_USER"
 
 # ── Install Python dependencies ───────────────────────────────────────────────
 echo "=== Installing Python dependencies ==="
-poetry install --no-dev
+poetry install --only main --no-root
 
 # ── Django setup ──────────────────────────────────────────────────────────────
 echo "=== Running Django setup ==="
