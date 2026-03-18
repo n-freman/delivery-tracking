@@ -33,7 +33,13 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG") in ["True", "true", "1"]
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = [
+    "http://62.113.115.31",
+    "http://log.dmcargo.biz",
+    "https://log.dmcargo.biz",
+    "https://localhost:8000",
+    "https://125.0.0.1:8000",
+]
 
 # Application definition
 
