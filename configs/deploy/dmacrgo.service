@@ -1,0 +1,20 @@
+[Unit]
+Description=DMCargo Gunicorn Daemon
+After=network.target
+
+[Service]
+User=dmcargo
+Group=dmcargo
+WorkingDirectory=/home/dmcargo/delivery-tracking
+EnvironmentFile=/home/dmcargo/delivery-tracking/.env
+ExecStart=/home/dmcargo/delivery-tracking/.venv/bin/gunicorn \
+    --workers 3 \
+    --bind unix:/home/dmcargo/delivery-tracking/run/gunicorn.sock \
+    --chdir /home/dmcargo/delivery-tracking/src \
+    core.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
